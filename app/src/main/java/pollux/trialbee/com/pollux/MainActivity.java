@@ -1,29 +1,23 @@
 package pollux.trialbee.com.pollux;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.util.Base64;
-import android.view.Menu;
-
 import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
-import android.util.Log;
+import android.util.Base64;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.webkit.JavascriptInterface;
-import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import org.json.JSONObject;
-
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 
@@ -48,9 +42,14 @@ public class MainActivity extends ActionBarActivity {
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
 
+        // Initialize webView with a zoomed out view (to get room for image)
+        webSettings.setLoadWithOverviewMode(true);
+        webSettings.setUseWideViewPort(true);
+
         // Add javascript interface
-        webView.addJavascriptInterface(new JsInterface(this), "Android");
         jsInterface = new JsInterface(this);
+        webView.addJavascriptInterface(jsInterface, "Android");
+
 
         // Load pollux server page on "http://pollux-server.heroku.com"
         WebView myWebView = (WebView) findViewById(R.id.webView);
@@ -95,16 +94,14 @@ public class MainActivity extends ActionBarActivity {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        Toast.makeText(this, "Request code: " + requestCode + "Result code: " + resultCode, Toast.LENGTH_SHORT).show();
         if (requestCode == REQUEST_IMAGE_CAPTURE) {
             // If a picture was taken and saved due to a request from webView
-            Uri photoUri = Uri.fromFile(photoFile);
-
-            WebView wv =(WebView) findViewById(R.id.webView);
-            wv.loadUrl(""+photoUri);
+            String photoString = Uri.fromFile(photoFile).toString();
+            WebView wv = (WebView) findViewById(R.id.webView);
+            wv.loadUrl("javascript:document.getElementsByTagName('img')[0].src='"+ photoString + "';");
         }
     }
+
     public void requestImage() {
         // Create the intent for capturing an image
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);

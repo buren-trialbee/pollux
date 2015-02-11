@@ -9,17 +9,21 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Base64;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -94,11 +98,29 @@ public class MainActivity extends ActionBarActivity {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // If a picture was taken and saved due to a request from webView
         if (requestCode == REQUEST_IMAGE_CAPTURE) {
-            // If a picture was taken and saved due to a request from webView
-            String photoString = Uri.fromFile(photoFile).toString();
+            // Get photo file as bitMap
+            Log.i(TAG, "Fetching photo bitmap from file...");
+            Bitmap bm = BitmapFactory.decodeFile(photoFile.getAbsolutePath());
+            Log.i(TAG, "Fetching photo bitmap from file... finished");
+
+            // Convert bitmap to byte array
+            Log.i(TAG, "Converting bitmap to byte array...");
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            bm.compress(Bitmap.CompressFormat.JPEG, 100, baos); //bm is the bitmap object
+            byte[] b = baos.toByteArray();
+            Log.i(TAG, "Converting bitmap to byte array... finished");
+
+            // Convert byte array to base64
+            Log.i(TAG, "Converting byte array to base64...");
+            String encodedImage = Base64.encodeToString(b, Base64.DEFAULT);
+            Log.i(TAG, "Converting byte array to base64... finished");
+//
+
+            // Change src of img tag to base64-encoded image
             WebView wv = (WebView) findViewById(R.id.webView);
-            wv.loadUrl("javascript:document.getElementsByTagName('img')[0].src='"+ photoString + "';");
+            wv.loadUrl("javascript:addImgBase64(\"" + encodedImage + "\")");
         }
     }
 
@@ -124,5 +146,16 @@ public class MainActivity extends ActionBarActivity {
                 exc.printStackTrace();
             }
         }
+    }
+    public void uploadImage() {
+        URL polluxServer;
+        try {
+            new URL("http://polux-server.heroku.com");
+        }
+        catch (MalformedURLException urlException) {
+
+        }
+
+
     }
 }

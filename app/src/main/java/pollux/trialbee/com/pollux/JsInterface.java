@@ -17,8 +17,6 @@ import java.io.IOException;
  */
 public class JsInterface {
     MainActivity mActivity;
-
-
     /**
      * Instantiate the interface and set the context
      */
@@ -42,7 +40,6 @@ public class JsInterface {
 
     @JavascriptInterface
     public void requestImage() {
-
         mActivity.requestImage();
 
     }

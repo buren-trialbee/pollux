@@ -28,7 +28,7 @@ public class JsInterface implements WebAppInterface {
     }
 
     /**
-     * Show a toast from the web page
+     * Show a toast, with text sent from web application
      */
     @JavascriptInterface
     public void showToast(String toast) {
@@ -50,7 +50,6 @@ public class JsInterface implements WebAppInterface {
 
     @JavascriptInterface
     public String getApplicationVersion() {
-
         return mActivity.getAPIVersion();
     }
 

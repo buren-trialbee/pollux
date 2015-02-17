@@ -113,14 +113,14 @@ public class MainActivity extends ActionBarActivity {
      * @param view //
      */
     public void uploadPicture(View view) {
-        WebView webView = (WebView) findViewById(R.id.webView);
-        webView.loadUrl("javascript:requestImage()");
+//        WebView webView = (WebView) findViewById(R.id.webView);
+//        webView.loadUrl("javascript:requestImage()");
+        requestImage();
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        // If a picture was taken and saved due to a request from webView
-        if (requestCode == REQUEST_IMAGE_CAPTURE) {
+        if (requestCode == REQUEST_IMAGE_CAPTURE) { // If a picture was taken and saved due to a request from webView
             String image = hw.getImageBase64();
             WebView wv = (WebView) findViewById(R.id.webView);
             wv.loadUrl("javascript:addImgBase64(\"" + image + "\")");

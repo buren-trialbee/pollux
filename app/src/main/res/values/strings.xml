@@ -2,5 +2,5 @@
 <resources>
     <string name="app_name">Pollux</string>
     <string name="action_settings">Settings</string>
-    <string name="button_say_hello">Say hello!</string>
+    <string name="button_upload_picture">Upload picture!</string>
 </resources>

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.webkit.JavascriptInterface;
@@ -15,17 +16,16 @@ import java.io.IOException;
 /**
  * Created by dauvid on 2015-02-03.
  */
-public class JsInterface {
+public class JsInterface implements WebAppInterface {
 //    MainActivity mActivity;
-    HardwareInterface hw;
+    private MainActivity mActivity;
     /**
      * Instantiate the interface and set the context
      */
-    JsInterface(HardwareInterface hw)
+    JsInterface(Context context)
     {
-        this.hw = hw;
+        mActivity = (MainActivity) context;
     }
-
     /**
      * Show a toast from the web page
      */
@@ -35,17 +35,16 @@ public class JsInterface {
 //        Toast.makeText(mContext, toast, Toast.LENGTH_SHORT).show();
 
         // Using this function as requestImage instead, until javaScript-function is added
-        requestImage();
+//        requestImage();
+        requestOSVersion();
     }
-
     /**
      * Request an image from the device
      */
     @JavascriptInterface
     public void requestImage() {
-        hw.requestImage();
+        mActivity.requestImage();
     }
-
     @JavascriptInterface
     public String[] requestDeviceInformation() {
         return null;
@@ -55,11 +54,7 @@ public class JsInterface {
         return null;
     }
     @JavascriptInterface
-    public String requestOSVersion() {
-        return null;
+    public void requestOSVersion() {
+        Toast.makeText(mActivity, String.valueOf(Build.VERSION.SDK_INT), Toast.LENGTH_SHORT).show();
     }
 }
-
-
-
-

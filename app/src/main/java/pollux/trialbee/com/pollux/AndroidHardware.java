@@ -21,19 +21,15 @@ import java.io.IOException;
  * Created by dauvid on 2015-02-17.
  */
 public class AndroidHardware implements HardwareInterface {
-    private Activity mActivity;
     public File photoFile;
-    public AndroidHardware(Context context){
-        mActivity = (Activity) context;
-    }
 
 
-    public void requestImage() {
+    public void requestImage(Context context, int requestCode) {
         // Create the intent for capturing an image
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
         // Ensure that there's a camera activity to handle the intent
-        if (takePictureIntent.resolveActivity(mActivity.getPackageManager()) != null) {
+        if (takePictureIntent.resolveActivity(context.getPackageManager()) != null) {
             // Create the File where the photo should go
             String fileName = "tempPhoto";
             File storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
@@ -44,13 +40,13 @@ public class AndroidHardware implements HardwareInterface {
                         Uri.fromFile(photoFile));
 
                 // Start camera activity and store resulting image in external storage
-                mActivity.startActivityForResult(takePictureIntent, MainActivity.REQUEST_IMAGE_CAPTURE);
+                ((Activity) context).startActivityForResult(takePictureIntent, requestCode);
             } catch (IOException exc) {
                 exc.printStackTrace();
             }
         }
     }
-    public String encodeImage() {
+    public String getImage() {
         // Get photo file as bitMap
         Bitmap bm = BitmapFactory.decodeFile(photoFile.getAbsolutePath());
 

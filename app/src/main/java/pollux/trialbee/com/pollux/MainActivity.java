@@ -41,7 +41,7 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         createWebView();
-        hw = new HardwareClass();
+        hw = new AndroidHardware();
     }
 
     private void createWebView(){
@@ -59,10 +59,10 @@ public class MainActivity extends ActionBarActivity {
         webSettings.setUseWideViewPort(true);
 
         // Add hardware interface
-        hw = new AndroidHardware(this);
+        hw = new AndroidHardware();
 
         // Add javascript interface
-        jsInterface = new JsInterface(hw);
+        jsInterface = new JsInterface(this);
         webView.addJavascriptInterface(jsInterface, "Android");
 
 
@@ -95,93 +95,30 @@ public class MainActivity extends ActionBarActivity {
 
 
     /**
-     * Call on javascript function sayHello() in webView
+     * Call on javascript function uploadPicture() in webView
      *
      * @param view //
      */
     public void uploadPicture(View view) {
         WebView webView = (WebView) findViewById(R.id.webView);
-
         webView.loadUrl("javascript:showAndroidToast(\"Hej\")");
         //jsInterface.showToast("hej");
-    }
-
-    public void uploadPicture(View view){
-        hw.takePicture();
-        
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         // If a picture was taken and saved due to a request from webView
         if (requestCode == REQUEST_IMAGE_CAPTURE) {
-
-
-            String encodedImage = hw.getLastPictureTaken();
-            // Change src of img tag to base64-encoded image
+            String image = hw.getImage();
             WebView wv = (WebView) findViewById(R.id.webView);
-            wv.loadUrl("javascript:addImgBase64(\"" + encodedImage + "\")");
-
-
-//            //MOVE THIS TO HARDWARE CLASS
-//            // Get photo file as bitMap
-//            Log.i(TAG, "Fetching photo bitmap from file...");
-//            Bitmap bm = BitmapFactory.decodeFile(photoFile.getAbsolutePath());
-//            Log.i(TAG, "Fetching photo bitmap from file... finished");
-//
-//            // Convert bitmap to byte array
-//            Log.i(TAG, "Converting bitmap to byte array...");
-//            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-//            bm.compress(Bitmap.CompressFormat.JPEG, 100, baos); //bm is the bitmap object
-//            byte[] b = baos.toByteArray();
-//            Log.i(TAG, "Converting bitmap to byte array... finished");
-//
-//            // Convert byte array to base64
-//            Log.i(TAG, "Converting byte array to base64...");
-//                String encodedImage = Base64.encodeToString(b, Base64.DEFAULT);
-//            Log.i(TAG, "Converting byte array to base64... finished");
-//// Change src of img tag to base64-encoded image
-//            WebView wv = (WebView) findViewById(R.id.webView);
-//            wv.loadUrl("javascript:addImgBase64(\"" + encodedImage + "\")");
+            wv.loadUrl("javascript:addImgBase64(\"" + image + "\")");
         }
     }
 
 
     public void requestImage() {
-
-        hw.takePicture();
-        // Create the intent for capturing an image
-        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-
-        // Ensure that there's a camera activity to handle the intent
-        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-            // Create the File where the photo should go
-            String fileName = "tempPhoto";
-            File storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
-            try {
-                photoFile = File.createTempFile(fileName, ".jpg", storageDir);
-//                Toast.makeText(mContext, photoFile.toString(), Toast.LENGTH_SHORT).show();
-                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT,
-                        Uri.fromFile(photoFile));
-
-                // Start camera activity and store resulting image in external storage
-                startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
-
-            } catch (IOException exc) {
-                exc.printStackTrace();
-            }
-        }
+        hw.requestImage(this, REQUEST_IMAGE_CAPTURE);
+        Log.i(TAG, "Image request to hw sent");
     }
 
-    public void uploadImage() {
-        URL polluxServer;
-        try {
-            new URL("http://polux-server.heroku.com");
-        }
-        catch (MalformedURLException urlException) {
-
-        }
-
-
-    }
 }

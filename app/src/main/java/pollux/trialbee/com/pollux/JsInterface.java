@@ -38,11 +38,27 @@ public class JsInterface {
         requestImage();
     }
 
+    /**
+     * Request an image from the device
+     */
     @JavascriptInterface
     public void requestImage() {
         mActivity.requestImage();
-
     }
+
+    @JavascriptInterface
+    public String[] requestDeviceInformation() {
+        return null;
+    }
+    @JavascriptInterface
+    public String requestApplicationVersionNumber() {
+        return null;
+    }
+    @JavascriptInterface
+    public String requestAndroidVersion() {
+        return null;
+    }
+
 }
 
 

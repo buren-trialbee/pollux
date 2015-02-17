@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -114,7 +115,7 @@ public class MainActivity extends ActionBarActivity {
 
             // Convert byte array to base64
             Log.i(TAG, "Converting byte array to base64...");
-            String encodedImage = Base64.encodeToString(b, Base64.DEFAULT);
+                String encodedImage = Base64.encodeToString(b, Base64.DEFAULT);
             Log.i(TAG, "Converting byte array to base64... finished");
 //
 

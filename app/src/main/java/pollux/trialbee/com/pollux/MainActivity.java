@@ -114,8 +114,7 @@ public class MainActivity extends ActionBarActivity {
      */
     public void uploadPicture(View view) {
         WebView webView = (WebView) findViewById(R.id.webView);
-        webView.loadUrl("javascript:showAndroidToast(\"Hej\")");
-        //jsInterface.showToast("hej");
+        webView.loadUrl("javascript:requestImage()");
     }
 
     @Override

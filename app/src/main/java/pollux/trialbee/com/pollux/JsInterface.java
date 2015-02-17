@@ -16,14 +16,14 @@ import java.io.IOException;
  * Created by dauvid on 2015-02-03.
  */
 public class JsInterface {
-    MainActivity mActivity;
+//    MainActivity mActivity;
+    HardwareInterface hw;
     /**
      * Instantiate the interface and set the context
      */
-    JsInterface(Context context) {
-        mActivity = (MainActivity) context;
-        // Instantiate a camera handler
-//        cameraHandler = new CameraHandler(context);
+    JsInterface(HardwareInterface hw)
+    {
+        this.hw = hw;
     }
 
     /**
@@ -43,7 +43,7 @@ public class JsInterface {
      */
     @JavascriptInterface
     public void requestImage() {
-        mActivity.requestImage();
+        hw.requestImage();
     }
 
     @JavascriptInterface
@@ -51,14 +51,13 @@ public class JsInterface {
         return null;
     }
     @JavascriptInterface
-    public String requestApplicationVersionNumber() {
+    public String requestApplicationVersion() {
         return null;
     }
     @JavascriptInterface
-    public String requestAndroidVersion() {
+    public String requestOSVersion() {
         return null;
     }
-
 }
 
 

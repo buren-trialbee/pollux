@@ -40,11 +40,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="MainActivity.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="MainActivity.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/pollux/trialbee/com/pollux/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1918" max-vertical-offset="2520">
-              <caret line="159" column="0" selection-start-line="159" selection-start-column="0" selection-end-line="159" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.37707642" vertical-offset="1063" max-vertical-offset="1665">
+              <caret line="110" column="62" selection-start-line="110" selection-start-column="62" selection-end-line="110" selection-end-column="62" />
               <folding />
             </state>
           </provider>
@@ -60,18 +60,26 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="JsInterface.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/pollux/trialbee/com/pollux/JsInterface.java">
+      <file leaf-file-name="AndroidHardware.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/pollux/trialbee/com/pollux/AndroidHardware.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.72259134" vertical-offset="0" max-vertical-offset="630">
-              <caret line="59" column="5" selection-start-line="59" selection-start-column="5" selection-end-line="59" selection-end-column="5" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="178" max-vertical-offset="1095">
+              <caret line="63" column="0" selection-start-line="63" selection-start-column="0" selection-end-line="63" selection-end-column="0" />
               <folding>
-                <element signature="docComment;class#JsInterface#0" expanded="false" />
-                <element signature="method#JsInterface#0;class#JsInterface#0" expanded="false" />
-                <element signature="e#598#629#0" expanded="false" />
-                <element signature="method#showToast#0;class#JsInterface#0" expanded="false" />
-                <element signature="e#820#858#0" expanded="false" />
+                <element signature="imports" expanded="true" />
+                <element signature="e#641#642#0" expanded="true" />
+                <element signature="e#687#688#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="HardwareInterface.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/pollux/trialbee/com/pollux/HardwareInterface.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="240">
+              <caret line="7" column="31" selection-start-line="7" selection-start-column="31" selection-end-line="7" selection-end-column="31" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -650,8 +658,10 @@
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/pollux/trialbee/com/pollux/MainActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/pollux/trialbee/com/pollux/JsInterface.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/pollux/trialbee/com/pollux/AndroidHardware.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/pollux/trialbee/com/pollux/HardwareInterface.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/pollux/trialbee/com/pollux/MainActivity.java" />
       </list>
     </option>
   </component>
@@ -1033,14 +1043,6 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/pollux/trialbee/com/pollux/MainActivity.java</url>
-          <line>105</line>
-          <properties />
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
       <option name="time" value="2" />
     </breakpoint-manager>
   </component>
@@ -1066,11 +1068,12 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="204" max-vertical-offset="630">
           <caret line="60" column="0" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
           <folding>
-            <element signature="docComment;class#JsInterface#0" expanded="false" />
-            <element signature="method#JsInterface#0;class#JsInterface#0" expanded="false" />
-            <element signature="e#598#629#0" expanded="false" />
+            <element signature="e#581#582#0" expanded="true" />
+            <element signature="e#609#610#0" expanded="true" />
             <element signature="method#showToast#0;class#JsInterface#0" expanded="false" />
-            <element signature="e#820#858#0" expanded="false" />
+            <element signature="e#741#779#0" expanded="false" />
+            <element signature="e#1085#1086#0" expanded="true" />
+            <element signature="e#1118#1119#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1116,6 +1119,21 @@
         <state />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/pollux/trialbee/com/pollux/JsInterface.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.22425249" vertical-offset="45" max-vertical-offset="735">
+          <caret line="22" column="7" selection-start-line="22" selection-start-column="7" selection-end-line="22" selection-end-column="7" />
+          <folding>
+            <element signature="e#581#582#0" expanded="true" />
+            <element signature="e#609#610#0" expanded="true" />
+            <element signature="method#showToast#0;class#JsInterface#0" expanded="false" />
+            <element signature="e#741#779#0" expanded="false" />
+            <element signature="e#1085#1086#0" expanded="true" />
+            <element signature="e#1118#1119#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/androidTest/java/pollux/trialbee/com/pollux/ApplicationTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="225">
@@ -1124,25 +1142,31 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/pollux/trialbee/com/pollux/MainActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/pollux/trialbee/com/pollux/AndroidHardware.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2169" max-vertical-offset="2520">
-          <caret line="159" column="0" selection-start-line="159" selection-start-column="0" selection-end-line="159" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="178" max-vertical-offset="1095">
+          <caret line="63" column="0" selection-start-line="63" selection-start-column="0" selection-end-line="63" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#641#642#0" expanded="true" />
+            <element signature="e#687#688#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/pollux/trialbee/com/pollux/HardwareInterface.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="240">
+          <caret line="7" column="31" selection-start-line="7" selection-start-column="31" selection-end-line="7" selection-end-column="31" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/pollux/trialbee/com/pollux/JsInterface.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/pollux/trialbee/com/pollux/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.72259134" vertical-offset="0" max-vertical-offset="630">
-          <caret line="59" column="5" selection-start-line="59" selection-start-column="5" selection-end-line="59" selection-end-column="5" />
-          <folding>
-            <element signature="docComment;class#JsInterface#0" expanded="false" />
-            <element signature="method#JsInterface#0;class#JsInterface#0" expanded="false" />
-            <element signature="e#598#629#0" expanded="false" />
-            <element signature="method#showToast#0;class#JsInterface#0" expanded="false" />
-            <element signature="e#820#858#0" expanded="false" />
-          </folding>
+        <state vertical-scroll-proportion="0.37707642" vertical-offset="1063" max-vertical-offset="1665">
+          <caret line="110" column="62" selection-start-line="110" selection-start-column="62" selection-end-line="110" selection-end-column="62" />
+          <folding />
         </state>
       </provider>
     </entry>

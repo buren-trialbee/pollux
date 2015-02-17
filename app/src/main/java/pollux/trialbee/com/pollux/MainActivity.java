@@ -28,16 +28,23 @@ import java.net.URL;
 
 
 public class MainActivity extends ActionBarActivity {
-    static final int REQUEST_IMAGE_CAPTURE = 1;
+    private static final int REQUEST_IMAGE_CAPTURE = 1;
     private static final String TAG = "MainActivity";
     private JsInterface jsInterface;
+
+    private File photoFile;
+
     private HardwareInterface hw;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        createWebView();
+        hw = new HardwareClass();
+    }
 
+    private void createWebView(){
         // Set webview client and webchrome client
         WebView webView = (WebView) findViewById(R.id.webView);
 //        webView.setWebChromeClient(new WebChromeClient());
@@ -75,7 +82,7 @@ public class MainActivity extends ActionBarActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
+        // automatically h  ndle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
@@ -83,7 +90,6 @@ public class MainActivity extends ActionBarActivity {
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -93,27 +99,79 @@ public class MainActivity extends ActionBarActivity {
      *
      * @param view //
      */
-    public void buttonSayHello(View view) {
+    public void uploadPicture(View view) {
         WebView webView = (WebView) findViewById(R.id.webView);
 
         webView.loadUrl("javascript:showAndroidToast(\"Hej\")");
         //jsInterface.showToast("hej");
     }
 
+    public void uploadPicture(View view){
+        hw.takePicture();
+        
+    }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         // If a picture was taken and saved due to a request from webView
         if (requestCode == REQUEST_IMAGE_CAPTURE) {
-            Log.i(TAG, "Encoding image as base64 string...");
-            String encodedImage = hw.encodeImage();
-            Log.i(TAG, "Encoding image as base64 string... Finished");
+
+
+            String encodedImage = hw.getLastPictureTaken();
             // Change src of img tag to base64-encoded image
             WebView wv = (WebView) findViewById(R.id.webView);
             wv.loadUrl("javascript:addImgBase64(\"" + encodedImage + "\")");
+
+
+//            //MOVE THIS TO HARDWARE CLASS
+//            // Get photo file as bitMap
+//            Log.i(TAG, "Fetching photo bitmap from file...");
+//            Bitmap bm = BitmapFactory.decodeFile(photoFile.getAbsolutePath());
+//            Log.i(TAG, "Fetching photo bitmap from file... finished");
+//
+//            // Convert bitmap to byte array
+//            Log.i(TAG, "Converting bitmap to byte array...");
+//            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//            bm.compress(Bitmap.CompressFormat.JPEG, 100, baos); //bm is the bitmap object
+//            byte[] b = baos.toByteArray();
+//            Log.i(TAG, "Converting bitmap to byte array... finished");
+//
+//            // Convert byte array to base64
+//            Log.i(TAG, "Converting byte array to base64...");
+//                String encodedImage = Base64.encodeToString(b, Base64.DEFAULT);
+//            Log.i(TAG, "Converting byte array to base64... finished");
+//// Change src of img tag to base64-encoded image
+//            WebView wv = (WebView) findViewById(R.id.webView);
+//            wv.loadUrl("javascript:addImgBase64(\"" + encodedImage + "\")");
         }
     }
 
 
+    public void requestImage() {
+
+        hw.takePicture();
+        // Create the intent for capturing an image
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+        // Ensure that there's a camera activity to handle the intent
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            // Create the File where the photo should go
+            String fileName = "tempPhoto";
+            File storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+            try {
+                photoFile = File.createTempFile(fileName, ".jpg", storageDir);
+//                Toast.makeText(mContext, photoFile.toString(), Toast.LENGTH_SHORT).show();
+                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT,
+                        Uri.fromFile(photoFile));
+
+                // Start camera activity and store resulting image in external storage
+                startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+
+            } catch (IOException exc) {
+                exc.printStackTrace();
+            }
+        }
+    }
 
     public void uploadImage() {
         URL polluxServer;

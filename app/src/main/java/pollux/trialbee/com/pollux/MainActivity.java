@@ -1,6 +1,7 @@
 package pollux.trialbee.com.pollux;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -18,6 +19,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
@@ -42,6 +44,7 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
         createWebView();
         hw = new AndroidHardware();
+        showDeviceInformation();
     }
 
     private void createWebView(){
@@ -78,7 +81,17 @@ public class MainActivity extends ActionBarActivity {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
-
+    // Mega super duper awesome method
+    private void showDeviceInformation() {
+        String bluetooth_available = "Bluetooth available: " + getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH);
+        String camera_available = "Camera available: " + getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA);
+        String accelerometer_available = "Accelerometer available: " + getPackageManager().hasSystemFeature(PackageManager.FEATURE_SENSOR_ACCELEROMETER);
+        String api_version = "Api version > 15: " + (Build.VERSION.SDK_INT > 15);
+        ((TextView)findViewById(R.id.text_bluetooth_available)).setText(bluetooth_available);
+        ((TextView)findViewById(R.id.text_camera_available)).setText(camera_available);
+        ((TextView)findViewById(R.id.text_accelerometer_available)).setText(accelerometer_available);
+        ((TextView)findViewById(R.id.text_api_version)).setText(api_version);
+    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -109,16 +122,19 @@ public class MainActivity extends ActionBarActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         // If a picture was taken and saved due to a request from webView
         if (requestCode == REQUEST_IMAGE_CAPTURE) {
-            String image = hw.getImage();
+            String image = hw.getImageBase64();
             WebView wv = (WebView) findViewById(R.id.webView);
             wv.loadUrl("javascript:addImgBase64(\"" + image + "\")");
         }
     }
-
-
     public void requestImage() {
         hw.requestImage(this, REQUEST_IMAGE_CAPTURE);
         Log.i(TAG, "Image request to hw sent");
     }
-
+    public String getAPIVersion() {
+        return hw.getAPIVersion();
+    }
+    public String hasSystemFeature(String feature) {
+        return String.valueOf(hw.hasSystemFeature(this, feature));
+    }
 }

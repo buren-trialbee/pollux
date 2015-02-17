@@ -6,7 +6,6 @@ import android.webkit.JavascriptInterface;
  * Created by dauvid on 2015-02-17.
  */
 public interface WebAppInterface {
-
     @JavascriptInterface
     public void showToast(String toast);
 
@@ -15,11 +14,11 @@ public interface WebAppInterface {
     public void requestImage();
 
     @JavascriptInterface
-    public String[] requestDeviceInformation();
+    public String hasSystemFeature(String feature);
 
     @JavascriptInterface
-    public String requestApplicationVersion();
+    public String getApplicationVersion();
 
     @JavascriptInterface
-    public void requestOSVersion();
+    public String getAPIVersion();
 }

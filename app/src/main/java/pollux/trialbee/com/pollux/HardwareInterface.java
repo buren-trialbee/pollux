@@ -7,6 +7,7 @@ import android.content.Context;
  */
 public interface HardwareInterface {
     public void requestImage(Context context, int requestCode);
-    public String getImage();
-
+    public String getImageBase64();
+    public String getAPIVersion();
+    public Boolean hasSystemFeature(Context context, String feature);
 }

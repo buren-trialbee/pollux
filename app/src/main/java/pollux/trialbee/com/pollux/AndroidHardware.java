@@ -3,9 +3,11 @@ package pollux.trialbee.com.pollux;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Base64;
@@ -14,7 +16,7 @@ import android.util.Log;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-
+import java.util.HashMap;
 
 
 /**
@@ -22,7 +24,6 @@ import java.io.IOException;
  */
 public class AndroidHardware implements HardwareInterface {
     public File photoFile;
-
 
     public void requestImage(Context context, int requestCode) {
         // Create the intent for capturing an image
@@ -46,7 +47,7 @@ public class AndroidHardware implements HardwareInterface {
             }
         }
     }
-    public String getImage() {
+    public String getImageBase64() {
         // Get photo file as bitMap
         Bitmap bm = BitmapFactory.decodeFile(photoFile.getAbsolutePath());
 
@@ -54,10 +55,22 @@ public class AndroidHardware implements HardwareInterface {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bm.compress(Bitmap.CompressFormat.JPEG, 100, baos); //bm is the bitmap object
         byte[] b = baos.toByteArray();
+        return Base64.encodeToString(b, Base64.DEFAULT);
+    }
+    public Boolean hasSystemFeature(Context context, String feature) {
+        switch(feature) {
+            case "camera":
+                return context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA);
+            case "accelerometer":
+                return context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_SENSOR_ACCELEROMETER);
+            case "bluetooth":
+                return context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH);
+            default:
+                return null;
+        }
+    }
 
-        // Convert byte array to base64
-        String encodedImage = Base64.encodeToString(b, Base64.DEFAULT);
-
-        return encodedImage;
+    public String getAPIVersion() {
+        return String.valueOf(Build.VERSION.SDK_INT);
     }
 }

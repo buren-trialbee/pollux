@@ -17,27 +17,24 @@ import java.io.IOException;
  * Created by dauvid on 2015-02-03.
  */
 public class JsInterface implements WebAppInterface {
-//    MainActivity mActivity;
+    //    MainActivity mActivity;
     private MainActivity mActivity;
+
     /**
      * Instantiate the interface and set the context
      */
-    JsInterface(Context context)
-    {
+    JsInterface(Context context) {
         mActivity = (MainActivity) context;
     }
+
     /**
      * Show a toast from the web page
      */
     @JavascriptInterface
     public void showToast(String toast) {
-        // The code that's supposed to be here
-//        Toast.makeText(mContext, toast, Toast.LENGTH_SHORT).show();
-
-        // Using this function as requestImage instead, until javaScript-function is added
-//        requestImage();
-        requestOSVersion();
+        Toast.makeText(mActivity, toast, Toast.LENGTH_SHORT).show();
     }
+
     /**
      * Request an image from the device
      */
@@ -45,16 +42,20 @@ public class JsInterface implements WebAppInterface {
     public void requestImage() {
         mActivity.requestImage();
     }
+
     @JavascriptInterface
-    public String[] requestDeviceInformation() {
-        return null;
+    public String hasSystemFeature(String feature) {
+        return mActivity.hasSystemFeature(feature);
     }
+
     @JavascriptInterface
-    public String requestApplicationVersion() {
-        return null;
+    public String getApplicationVersion() {
+
+        return mActivity.getAPIVersion();
     }
+
     @JavascriptInterface
-    public void requestOSVersion() {
-        Toast.makeText(mActivity, String.valueOf(Build.VERSION.SDK_INT), Toast.LENGTH_SHORT).show();
+    public String getAPIVersion() {
+        return mActivity.getAPIVersion();
     }
 }

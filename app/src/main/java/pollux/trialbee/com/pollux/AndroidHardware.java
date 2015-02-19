@@ -1,6 +1,7 @@
 package pollux.trialbee.com.pollux;
 
 import android.app.Activity;
+import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -28,7 +29,6 @@ import java.util.HashMap;
 public class AndroidHardware implements HardwareInterface {
     public File photoFile;
     private Context context;
-
     public AndroidHardware(Context context) {
         this.context = context;
     }
@@ -90,5 +90,8 @@ public class AndroidHardware implements HardwareInterface {
         jsonObject.put("bluetooth", context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH));
         jsonObject.put("accelerometer", context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_SENSOR_ACCELEROMETER));
         return jsonObject.toString();
+    }
+    public void discoverBluetoothDevices() {
+
     }
 }

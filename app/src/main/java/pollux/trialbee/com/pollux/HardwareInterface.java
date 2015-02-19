@@ -14,4 +14,5 @@ public interface HardwareInterface {
     public String getAPIVersion();
     public Boolean hasSystemFeature(String feature);
     public String getDeviceInfo() throws JSONException;
+    public void discoverBluetoothDevices();
 }

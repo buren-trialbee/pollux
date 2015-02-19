@@ -10,6 +10,8 @@ import android.provider.MediaStore;
 import android.webkit.JavascriptInterface;
 import android.widget.Toast;
 
+import org.json.JSONObject;
+
 import java.io.File;
 import java.io.IOException;
 
@@ -56,5 +58,10 @@ public class JsInterface implements WebAppInterface {
     @JavascriptInterface
     public String getAPIVersion() {
         return mActivity.getAPIVersion();
+    }
+
+    @JavascriptInterface
+    public String getDeviceInfo() {
+        return mActivity.getDeviceInfo();
     }
 }

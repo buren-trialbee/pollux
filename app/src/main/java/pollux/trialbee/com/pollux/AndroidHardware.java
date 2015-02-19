@@ -13,6 +13,9 @@ import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
@@ -24,8 +27,13 @@ import java.util.HashMap;
  */
 public class AndroidHardware implements HardwareInterface {
     public File photoFile;
+    private Context context;
 
-    public void requestImage(Context context, int requestCode) {
+    public AndroidHardware(Context context) {
+        this.context = context;
+    }
+
+    public void requestImage(int requestCode) {
         // Create the intent for capturing an image
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
@@ -47,6 +55,7 @@ public class AndroidHardware implements HardwareInterface {
             }
         }
     }
+
     public String getImageBase64() {
         // Get photo file as bitMap
         Bitmap bm = BitmapFactory.decodeFile(photoFile.getAbsolutePath());
@@ -57,8 +66,9 @@ public class AndroidHardware implements HardwareInterface {
         byte[] b = baos.toByteArray();
         return Base64.encodeToString(b, Base64.DEFAULT);
     }
-    public Boolean hasSystemFeature(Context context, String feature) {
-        switch(feature) {
+
+    public Boolean hasSystemFeature(String feature) {
+        switch (feature) {
             case "camera":
                 return context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA);
             case "accelerometer":
@@ -72,5 +82,13 @@ public class AndroidHardware implements HardwareInterface {
 
     public String getAPIVersion() {
         return String.valueOf(Build.VERSION.SDK_INT);
+    }
+
+    public String getDeviceInfo() throws JSONException{
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("camera", context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_ANY));
+        jsonObject.put("bluetooth", context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH));
+        jsonObject.put("accelerometer", context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_SENSOR_ACCELEROMETER));
+        return jsonObject.toString();
     }
 }

@@ -2,6 +2,8 @@ package pollux.trialbee.com.pollux;
 
 import android.webkit.JavascriptInterface;
 
+import org.json.JSONObject;
+
 /**
  * Created by dauvid on 2015-02-17.
  */
@@ -18,11 +20,18 @@ public interface WebAppInterface {
     @JavascriptInterface
     public String hasSystemFeature(String feature);
 
+    @JavascriptInterface
+    public String getDeviceInfo();
+
+
     // Get current version of the android-application
     @JavascriptInterface
     public String getApplicationVersion();
 
+    //    @JavascriptInterface
+//    public void discoverBluetoothDevices();
     // Get current API version unit is running on
     @JavascriptInterface
     public String getAPIVersion();
+//
 }

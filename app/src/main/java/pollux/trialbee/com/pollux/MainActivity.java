@@ -22,6 +22,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
@@ -43,7 +46,7 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         createWebView();
-        hw = new AndroidHardware();
+        hw = new AndroidHardware(this);
         showDeviceInformation();
     }
 
@@ -62,7 +65,7 @@ public class MainActivity extends ActionBarActivity {
         webSettings.setUseWideViewPort(true);
 
         // Add hardware interface
-        hw = new AndroidHardware();
+        hw = new AndroidHardware(this);
 
         // Add javascript interface
         jsInterface = new JsInterface(this);
@@ -120,20 +123,28 @@ public class MainActivity extends ActionBarActivity {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_IMAGE_CAPTURE) { // If a picture was taken and saved due to a request from webView
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) { // If a picture was taken and saved due to a request from webView
             String image = hw.getImageBase64();
             WebView wv = (WebView) findViewById(R.id.webView);
             wv.loadUrl("javascript:addImgBase64(\"" + image + "\")");
         }
     }
     public void requestImage() {
-        hw.requestImage(this, REQUEST_IMAGE_CAPTURE);
+        hw.requestImage(REQUEST_IMAGE_CAPTURE);
         Log.i(TAG, "Image request to hw sent");
     }
     public String getAPIVersion() {
         return hw.getAPIVersion();
     }
     public String hasSystemFeature(String feature) {
-        return String.valueOf(hw.hasSystemFeature(this, feature));
+        return String.valueOf(hw.hasSystemFeature(feature));
+    }
+    public String getDeviceInfo() {
+        try {
+            return hw.getDeviceInfo();
+        } catch (JSONException exc) {
+            Log.e(TAG, exc.getMessage());
+            return null;
+        }
     }
 }

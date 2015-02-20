@@ -61,6 +61,11 @@ public class JsInterface implements WebAppInterface {
     }
 
     @JavascriptInterface
+    public void discoverBluetoothDevices() {
+        mActivity.discoverBluetoothDevices();
+    }
+
+    @JavascriptInterface
     public String getDeviceInfo() {
         return mActivity.getDeviceInfo();
     }

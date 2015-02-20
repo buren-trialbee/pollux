@@ -29,7 +29,7 @@ public class MainActivity extends ActionBarActivity {
     private JsInterface jsInterface;
     private File photoFile;
 
-//    private ArrayAdapter<String> mArrayAdapter;
+    //    private ArrayAdapter<String> mArrayAdapter;
 //    private String
     private HardwareInterface hw;
     // Create a BroadcastReceiver for ACTION_FOUND
@@ -40,7 +40,7 @@ public class MainActivity extends ActionBarActivity {
             if (BluetoothDevice.ACTION_FOUND.equals(action)) {
 //                // Get the BluetoothDevice object from the Intent
                 BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
-                 Log.i(TAG, device.getName() + " " + device.getAddress());
+                Log.i(TAG, device.getName() + " " + device.getAddress());
             }
         }
     };
@@ -175,12 +175,11 @@ public class MainActivity extends ActionBarActivity {
         }
     }
 
-    private void discoverBluetoothDevices(){
+    public void discoverBluetoothDevices() {
         if (!hw.isBluetoothActivated()) {
             hw.requestStartBluetooth(REQUEST_ENABLE_BT);
         } else {
             hw.discoverBluetoothDevices();
         }
-
     }
 }

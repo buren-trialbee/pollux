@@ -41,26 +41,39 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="MainActivity.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="MainActivity.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/pollux/trialbee/com/pollux/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="2026" max-vertical-offset="2550">
-              <caret line="58" column="5" selection-start-line="58" selection-start-column="5" selection-end-line="58" selection-end-column="5" />
+            <state vertical-scroll-proportion="0.74236643" vertical-offset="2011" max-vertical-offset="2535">
+              <caret line="181" column="42" selection-start-line="181" selection-start-column="42" selection-end-line="181" selection-end-column="42" />
               <folding>
-                <element signature="e#1098#1614#0" expanded="true" />
-                <element signature="e#1607#1608#0" expanded="true" />
+                <element signature="e#1102#1617#0" expanded="true" />
+                <element signature="e#1610#1611#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="WebAppInterface.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="WebAppInterface.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/pollux/trialbee/com/pollux/WebAppInterface.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.74860334" vertical-offset="108" max-vertical-offset="645">
-              <caret line="34" column="34" selection-start-line="34" selection-start-column="34" selection-end-line="34" selection-end-column="34" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="108" max-vertical-offset="675">
+              <caret line="37" column="43" selection-start-line="37" selection-start-column="43" selection-end-line="37" selection-end-column="43" />
               <folding>
                 <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="JsInterface.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/pollux/trialbee/com/pollux/JsInterface.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="780">
+              <caret line="67" column="0" selection-start-line="67" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
+              <folding>
+                <element signature="e#1525#1526#0" expanded="true" />
+                <element signature="e#1577#1578#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -69,7 +82,7 @@
       <file leaf-file-name="AndroidHardware.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/pollux/trialbee/com/pollux/AndroidHardware.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1845" max-vertical-offset="2040">
+            <state vertical-scroll-proportion="0.0" vertical-offset="676" max-vertical-offset="1605">
               <caret line="123" column="26" selection-start-line="123" selection-start-column="26" selection-end-line="123" selection-end-column="26" />
               <folding />
             </state>
@@ -765,11 +778,11 @@
       <list>
         <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/pollux/trialbee/com/pollux/WebAppInterface.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/pollux/trialbee/com/pollux/JsInterface.java" />
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/pollux/trialbee/com/pollux/HardwareInterface.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/pollux/trialbee/com/pollux/AndroidHardware.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/pollux/trialbee/com/pollux/WebAppInterface.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/pollux/trialbee/com/pollux/JsInterface.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/pollux/trialbee/com/pollux/MainActivity.java" />
       </list>
     </option>
@@ -1125,7 +1138,7 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2494043" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2494043" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.66136724" sideWeight="0.49960285" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Memory Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3990461" sideWeight="0.567911" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1197,8 +1210,8 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2595">
           <caret line="60" column="43" selection-start-line="60" selection-start-column="43" selection-end-line="60" selection-end-column="43" />
           <folding>
-            <element signature="e#1098#1614#0" expanded="true" />
-            <element signature="e#1607#1608#0" expanded="true" />
+            <element signature="e#1102#1617#0" expanded="true" />
+            <element signature="e#1610#1611#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1224,8 +1237,8 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1740">
           <caret line="125" column="30" selection-start-line="125" selection-start-column="30" selection-end-line="125" selection-end-column="30" />
           <folding>
-            <element signature="e#1098#1614#0" expanded="true" />
-            <element signature="e#1607#1608#0" expanded="true" />
+            <element signature="e#1102#1617#0" expanded="true" />
+            <element signature="e#1610#1611#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1234,7 +1247,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="330" max-vertical-offset="975">
           <caret line="22" column="7" selection-start-line="22" selection-start-column="7" selection-end-line="22" selection-end-column="7" />
-          <folding />
+          <folding>
+            <element signature="e#1525#1526#0" expanded="true" />
+            <element signature="e#1577#1578#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1269,8 +1285,8 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1770">
           <caret line="125" column="30" selection-start-line="125" selection-start-column="30" selection-end-line="125" selection-end-column="30" />
           <folding>
-            <element signature="e#1098#1614#0" expanded="true" />
-            <element signature="e#1607#1608#0" expanded="true" />
+            <element signature="e#1102#1617#0" expanded="true" />
+            <element signature="e#1610#1611#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1279,7 +1295,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="330" max-vertical-offset="975">
           <caret line="22" column="7" selection-start-line="22" selection-start-column="7" selection-end-line="22" selection-end-column="7" />
-          <folding />
+          <folding>
+            <element signature="e#1525#1526#0" expanded="true" />
+            <element signature="e#1577#1578#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1314,8 +1333,8 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="2169" max-vertical-offset="2520">
           <caret line="159" column="0" selection-start-line="159" selection-start-column="0" selection-end-line="159" selection-end-column="0" />
           <folding>
-            <element signature="e#1098#1614#0" expanded="true" />
-            <element signature="e#1607#1608#0" expanded="true" />
+            <element signature="e#1102#1617#0" expanded="true" />
+            <element signature="e#1610#1611#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1331,7 +1350,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="204" max-vertical-offset="630">
           <caret line="60" column="0" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#1525#1526#0" expanded="true" />
+            <element signature="e#1577#1578#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1411,14 +1433,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/pollux/trialbee/com/pollux/JsInterface.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="168" max-vertical-offset="705">
-          <caret line="65" column="5" selection-start-line="65" selection-start-column="5" selection-end-line="65" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/Android/Sdk/sources/android-21/android/bluetooth/BluetoothAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33333334" vertical-offset="11686" max-vertical-offset="25620">
@@ -1461,23 +1475,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/pollux/trialbee/com/pollux/MainActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/pollux/trialbee/com/pollux/JsInterface.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2026" max-vertical-offset="2550">
-          <caret line="58" column="5" selection-start-line="58" selection-start-column="5" selection-end-line="58" selection-end-column="5" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="780">
+          <caret line="67" column="0" selection-start-line="67" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
           <folding>
-            <element signature="e#1098#1614#0" expanded="true" />
-            <element signature="e#1607#1608#0" expanded="true" />
+            <element signature="e#1525#1526#0" expanded="true" />
+            <element signature="e#1577#1578#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/pollux/trialbee/com/pollux/WebAppInterface.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.74860334" vertical-offset="108" max-vertical-offset="645">
-          <caret line="34" column="34" selection-start-line="34" selection-start-column="34" selection-end-line="34" selection-end-column="34" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="108" max-vertical-offset="675">
+          <caret line="37" column="43" selection-start-line="37" selection-start-column="43" selection-end-line="37" selection-end-column="43" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/pollux/trialbee/com/pollux/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.74236643" vertical-offset="2011" max-vertical-offset="2535">
+          <caret line="181" column="42" selection-start-line="181" selection-start-column="42" selection-end-line="181" selection-end-column="42" />
+          <folding>
+            <element signature="e#1102#1617#0" expanded="true" />
+            <element signature="e#1610#1611#0" expanded="true" />
           </folding>
         </state>
       </provider>

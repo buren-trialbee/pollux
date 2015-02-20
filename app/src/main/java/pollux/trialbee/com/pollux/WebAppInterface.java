@@ -33,5 +33,7 @@ public interface WebAppInterface {
     // Get current API version unit is running on
     @JavascriptInterface
     public String getAPIVersion();
-//
+
+    @JavascriptInterface
+    public void discoverBluetoothDevices();
 }

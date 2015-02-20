@@ -33,6 +33,7 @@ public class AndroidHardware implements HardwareInterface {
     public File photoFile;
     private Context context;
     private BluetoothAdapter mBluetoothAdapter;
+
     public AndroidHardware(Context context) {
         this.context = context;
         // Initialize member variable for default bluetooth adapter
@@ -91,7 +92,7 @@ public class AndroidHardware implements HardwareInterface {
         return String.valueOf(Build.VERSION.SDK_INT);
     }
 
-    public String getDeviceInfo() throws JSONException{
+    public String getDeviceInfo() throws JSONException {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("camera", context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_ANY));
         jsonObject.put("bluetooth", context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH));
@@ -109,19 +110,17 @@ public class AndroidHardware implements HardwareInterface {
     }
 
     @Override
-    public String[] getPairedDevices() {
+    public HashMap<String, String> getPairedBluetoothDevices() {
         Set<BluetoothDevice> pairedDevices = mBluetoothAdapter.getBondedDevices();
-        ArrayList<String> pairedDevicesArray = new ArrayList<String>();
-// If there are paired devices
+        HashMap<String, String> pairedDevicesMap = new HashMap<String, String>();
+        // If there are paired devices
         if (pairedDevices.size() > 0) {
             // Loop through paired devices
             for (BluetoothDevice device : pairedDevices) {
-                pairedDevicesArray.add(device.getName());
-                // Add the name and address to an array adapter to show in a ListView
-//                mArrayAdapter.add(device.getName() + "\n" + device.getAddress());
+                pairedDevicesMap.put(device.getAddress(), device.getName());
             }
         }
-        return (String[]) pairedDevicesArray.toArray();
+        return pairedDevicesMap;
     }
 
     public void discoverBluetoothDevices() {

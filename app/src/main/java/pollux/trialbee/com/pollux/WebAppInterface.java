@@ -36,4 +36,7 @@ public interface WebAppInterface {
 
     @JavascriptInterface
     public void discoverBluetoothDevices();
+
+    @JavascriptInterface
+    public void getPairedBluetoothDevices();
 }

@@ -19,38 +19,46 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
 
 
 public class MainActivity extends ActionBarActivity {
+    // Request codes
     private static final int REQUEST_IMAGE_CAPTURE = 1;
     private static final int REQUEST_ENABLE_BT = 2;
+    private WebViewDataSender webViewDataSender;
+    // Log tag
     private static final String TAG = "MainActivity";
+    // Private member fields
     private JsInterface jsInterface;
     private File photoFile;
     private HashMap<String, String> bluetoothDevices;
-
-    //    private ArrayAdapter<String> mArrayAdapter;
-//    private String
     private HardwareInterface hw;
+
     // Create a BroadcastReceiver for ACTION_FOUND
     private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
-            // When discovery finds a device
-            if (BluetoothDevice.ACTION_FOUND.equals(action)) {
+            if (BluetoothDevice.ACTION_FOUND.equals(action)) {  // When discovery finds a device
 //                // Get the BluetoothDevice object from the Intent
                 BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
-                if(!bluetoothDevices.containsKey(device.getAddress())){
-                    bluetoothDevices.put(device.getAddress(), device.getName());
+                if (!bluetoothDevices.containsKey(device.getAddress())) {
+                    String deviceName = device.getName() == null ? "Unnamed" : device.getName();
+
+                    bluetoothDevices.put(device.getAddress(), deviceName);
                     JSONObject newBluetoothDevice = new JSONObject();
                     try {
-                        newBluetoothDevice.put(device.getAddress(), device.getName());
+//                        newBluetoothDevice.put(device.getAddress(), deviceName);
+
+                        newBluetoothDevice.put(device.getAddress(), deviceName);
                         WebView myWebView = (WebView) findViewById(R.id.webView);
-                        Log.i(TAG, "device name is: " + device.getName());
+                        Log.i(TAG, "device name is: " + deviceName);
                         Log.i(TAG, "device adress is: " + device.getAddress());
-                        myWebView.loadUrl("javascript:foundBluetoothDevices(\"" + newBluetoothDevice.toString() + "\")");
+                        Log.i(TAG, "Sending string: " + newBluetoothDevice.toString());
+
+                        myWebView.loadUrl("javascript:foundBluetoothDevices('" + newBluetoothDevice.toString() + "')");
 
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -67,6 +75,7 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         createWebView();
+
         hw = new AndroidHardware(this);
 
 
@@ -97,9 +106,6 @@ public class MainActivity extends ActionBarActivity {
         webSettings.setLoadWithOverviewMode(true);
         webSettings.setUseWideViewPort(true);
 
-        // Add hardware interface
-        hw = new AndroidHardware(this);
-
         // Add javascript interface
         jsInterface = new JsInterface(this);
         webView.addJavascriptInterface(jsInterface, "Android");
@@ -118,17 +124,6 @@ public class MainActivity extends ActionBarActivity {
         return true;
     }
 
-    // Mega super duper awesome method
-//    private void showDeviceInformation() {
-//        String bluetooth_available = "Bluetooth available: " + getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH);
-//        String camera_available = "Camera available: " + getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA);
-//        String accelerometer_available = "Accelerometer available: " + getPackageManager().hasSystemFeature(PackageManager.FEATURE_SENSOR_ACCELEROMETER);
-//        String api_version = "Api version > 15: " + (Build.VERSION.SDK_INT > 15);
-//        ((TextView)findViewById(R.id.text_bluetooth_available)).setText(bluetooth_available);
-//        ((TextView)findViewById(R.id.text_camera_available)).setText(camera_available);
-//        ((TextView)findViewById(R.id.text_accelerometer_available)).setText(accelerometer_available);
-//        ((TextView)findViewById(R.id.text_api_version)).setText(api_version);
-//    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -191,7 +186,21 @@ public class MainActivity extends ActionBarActivity {
             return null;
         }
     }
-
+    public void getPairedBluetoothDevices() {
+        HashMap<String, String> pairedBluetoothDevices = hw.getPairedBluetoothDevices();
+        Log.i(TAG, "Paired devices:");
+        JSONObject pairedBluetoothDevice = new JSONObject();
+        for (String address: pairedBluetoothDevices.keySet()) {
+            try {
+                pairedBluetoothDevice.put(address, pairedBluetoothDevices.get(address));
+            } catch (JSONException e) {
+                e.printStackTrace();
+                Log.i(TAG, address + " " + pairedBluetoothDevices.get(address));
+            }
+        }
+        WebView myWebView = (WebView) findViewById(R.id.webView);
+        myWebView.loadUrl("javascript:foundBluetoothDevices('" + pairedBluetoothDevice.toString() + "')");
+    }
     public void discoverBluetoothDevices() {
         bluetoothDevices = new HashMap<String, String>();
         if (!hw.isBluetoothActivated()) {

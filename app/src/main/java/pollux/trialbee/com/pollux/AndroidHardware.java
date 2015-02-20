@@ -100,7 +100,7 @@ public class AndroidHardware implements HardwareInterface {
     }
 
     public boolean isBluetoothActivated() {
-        return !mBluetoothAdapter.isEnabled();
+        return mBluetoothAdapter.isEnabled();
     }
 
     public void requestStartBluetooth(int requestCode) {

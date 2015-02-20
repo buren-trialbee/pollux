@@ -19,6 +19,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.Set;
 
 
@@ -28,6 +29,7 @@ public class MainActivity extends ActionBarActivity {
     private static final String TAG = "MainActivity";
     private JsInterface jsInterface;
     private File photoFile;
+    private HashMap<String, String> bluetoothDevices;
 
     //    private ArrayAdapter<String> mArrayAdapter;
 //    private String
@@ -40,7 +42,22 @@ public class MainActivity extends ActionBarActivity {
             if (BluetoothDevice.ACTION_FOUND.equals(action)) {
 //                // Get the BluetoothDevice object from the Intent
                 BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
-                Log.i(TAG, device.getName() + " " + device.getAddress());
+                if(!bluetoothDevices.containsKey(device.getAddress())){
+                    bluetoothDevices.put(device.getAddress(), device.getName());
+                    JSONObject newBluetoothDevice = new JSONObject();
+                    try {
+                        newBluetoothDevice.put(device.getAddress(), device.getName());
+                        WebView myWebView = (WebView) findViewById(R.id.webView);
+                        Log.i(TAG, "device name is: " + device.getName());
+                        Log.i(TAG, "device adress is: " + device.getAddress());
+                        myWebView.loadUrl("javascript:foundBluetoothDevices(\"" + newBluetoothDevice.toString() + "\")");
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        Log.i(TAG, device.getAddress() + " " + device.getName());
+                    }
+                }
+//                Log.i(TAG, device.getName() + " " + device.getAddress());
             }
         }
     };
@@ -55,8 +72,8 @@ public class MainActivity extends ActionBarActivity {
 
         IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
         registerReceiver(mReceiver, filter); // Don't forget to unregister during onDestroy
-        String[] pairedDevices = hw.getPairedDevices();
-        Log.i(TAG, pairedDevices.toString());
+//        String[] pairedDevices = hw.getPairedDevices();
+//        Log.i(TAG, pairedDevices.toString());
     }
 
     @Override
@@ -176,6 +193,7 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void discoverBluetoothDevices() {
+        bluetoothDevices = new HashMap<String, String>();
         if (!hw.isBluetoothActivated()) {
             hw.requestStartBluetooth(REQUEST_ENABLE_BT);
         } else {

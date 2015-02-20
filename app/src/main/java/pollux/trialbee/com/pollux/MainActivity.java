@@ -11,17 +11,12 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Set;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -32,7 +27,6 @@ public class MainActivity extends ActionBarActivity {
     // Log tag
     private static final String TAG = "MainActivity";
     // Private member fields
-    private JsInterface jsInterface;
     private File photoFile;
     private HashMap<String, String> bluetoothDevices;
     private HardwareInterface hw;
@@ -53,12 +47,10 @@ public class MainActivity extends ActionBarActivity {
 //                        newBluetoothDevice.put(device.getAddress(), deviceName);
 
                         newBluetoothDevice.put(device.getAddress(), deviceName);
-                        WebView myWebView = (WebView) findViewById(R.id.webView);
                         Log.i(TAG, "device name is: " + deviceName);
                         Log.i(TAG, "device adress is: " + device.getAddress());
                         Log.i(TAG, "Sending string: " + newBluetoothDevice.toString());
-
-                        myWebView.loadUrl("javascript:foundBluetoothDevices('" + newBluetoothDevice.toString() + "')");
+                        webViewDataSender.sendData("foundBluetoothDevices", newBluetoothDevice.toString());
 
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -74,15 +66,12 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        createWebView();
+        webViewDataSender = new WebViewDataSender(this);
 
         hw = new AndroidHardware(this);
 
-
         IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
         registerReceiver(mReceiver, filter); // Don't forget to unregister during onDestroy
-//        String[] pairedDevices = hw.getPairedDevices();
-//        Log.i(TAG, pairedDevices.toString());
     }
 
     @Override
@@ -91,31 +80,6 @@ public class MainActivity extends ActionBarActivity {
         unregisterReceiver(mReceiver);
 
     }
-
-    private void createWebView() {
-        // Set webview client and webchrome client
-        WebView webView = (WebView) findViewById(R.id.webView);
-//        webView.setWebChromeClient(new WebChromeClient());
-        webView.setWebViewClient(new WebViewClient());
-
-        // Enable javascript
-        WebSettings webSettings = webView.getSettings();
-        webSettings.setJavaScriptEnabled(true);
-
-        // Initialize webView with a zoomed out view (to get room for image)
-        webSettings.setLoadWithOverviewMode(true);
-        webSettings.setUseWideViewPort(true);
-
-        // Add javascript interface
-        jsInterface = new JsInterface(this);
-        webView.addJavascriptInterface(jsInterface, "Android");
-
-
-        // Load pollux server page on "http://pollux-server.heroku.com"
-        WebView myWebView = (WebView) findViewById(R.id.webView);
-        myWebView.loadUrl("http://pollux-server.heroku.com");
-    }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -145,8 +109,6 @@ public class MainActivity extends ActionBarActivity {
      * @param view //
      */
     public void uploadPicture(View view) {
-//        WebView webView = (WebView) findViewById(R.id.webView);
-//        webView.loadUrl("javascript:requestImage()");
         requestImage();
     }
 
@@ -161,8 +123,7 @@ public class MainActivity extends ActionBarActivity {
 
     private void sendImageToWebview() {
         String image = hw.getImageBase64();
-        WebView wv = (WebView) findViewById(R.id.webView);
-        wv.loadUrl("javascript:addImgBase64(\"" + image + "\")");
+        webViewDataSender.sendData("addImgBase64", image);
     }
 
     public void requestImage() {
@@ -186,11 +147,12 @@ public class MainActivity extends ActionBarActivity {
             return null;
         }
     }
+
     public void getPairedBluetoothDevices() {
         HashMap<String, String> pairedBluetoothDevices = hw.getPairedBluetoothDevices();
         Log.i(TAG, "Paired devices:");
         JSONObject pairedBluetoothDevice = new JSONObject();
-        for (String address: pairedBluetoothDevices.keySet()) {
+        for (String address : pairedBluetoothDevices.keySet()) {
             try {
                 pairedBluetoothDevice.put(address, pairedBluetoothDevices.get(address));
             } catch (JSONException e) {
@@ -198,9 +160,9 @@ public class MainActivity extends ActionBarActivity {
                 Log.i(TAG, address + " " + pairedBluetoothDevices.get(address));
             }
         }
-        WebView myWebView = (WebView) findViewById(R.id.webView);
-        myWebView.loadUrl("javascript:foundBluetoothDevices('" + pairedBluetoothDevice.toString() + "')");
+        webViewDataSender.sendData("showPairedBluetoothDevices", pairedBluetoothDevice.toString());
     }
+
     public void discoverBluetoothDevices() {
         bluetoothDevices = new HashMap<String, String>();
         if (!hw.isBluetoothActivated()) {
@@ -209,4 +171,5 @@ public class MainActivity extends ActionBarActivity {
             hw.discoverBluetoothDevices();
         }
     }
+    
 }

@@ -15,4 +15,8 @@ public interface HardwareInterface {
     public Boolean hasSystemFeature(String feature);
     public String getDeviceInfo() throws JSONException;
     public void discoverBluetoothDevices();
+    public boolean isBluetoothActivated();
+    public void requestStartBluetooth(int requestEnableBt);
+
+    public String[] getPairedDevices();
 }

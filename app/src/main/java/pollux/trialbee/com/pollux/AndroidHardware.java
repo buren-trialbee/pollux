@@ -2,6 +2,7 @@ package pollux.trialbee.com.pollux;
 
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -20,7 +21,9 @@ import org.json.JSONObject;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Set;
 
 
 /**
@@ -29,8 +32,12 @@ import java.util.HashMap;
 public class AndroidHardware implements HardwareInterface {
     public File photoFile;
     private Context context;
+    private BluetoothAdapter mBluetoothAdapter;
     public AndroidHardware(Context context) {
         this.context = context;
+        // Initialize member variable for default bluetooth adapter
+        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+
     }
 
     public void requestImage(int requestCode) {
@@ -91,7 +98,33 @@ public class AndroidHardware implements HardwareInterface {
         jsonObject.put("accelerometer", context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_SENSOR_ACCELEROMETER));
         return jsonObject.toString();
     }
-    public void discoverBluetoothDevices() {
 
+    public boolean isBluetoothActivated() {
+        return !mBluetoothAdapter.isEnabled();
+    }
+
+    public void requestStartBluetooth(int requestCode) {
+        Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+        ((Activity) context).startActivityForResult(enableBtIntent, requestCode);
+    }
+
+    @Override
+    public String[] getPairedDevices() {
+        Set<BluetoothDevice> pairedDevices = mBluetoothAdapter.getBondedDevices();
+        ArrayList<String> pairedDevicesArray = new ArrayList<String>();
+// If there are paired devices
+        if (pairedDevices.size() > 0) {
+            // Loop through paired devices
+            for (BluetoothDevice device : pairedDevices) {
+                pairedDevicesArray.add(device.getName());
+                // Add the name and address to an array adapter to show in a ListView
+//                mArrayAdapter.add(device.getName() + "\n" + device.getAddress());
+            }
+        }
+        return (String[]) pairedDevicesArray.toArray();
+    }
+
+    public void discoverBluetoothDevices() {
+        mBluetoothAdapter.startDiscovery();
     }
 }

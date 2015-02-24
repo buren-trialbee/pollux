@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.webkit.JavascriptInterface;
 import android.widget.Toast;
 
@@ -73,6 +74,26 @@ public class JsInterface implements WebAppInterface {
     @JavascriptInterface
     public void getPairedBluetoothDevices() {
         mActivity.getPairedBluetoothDevices();
+    }
+
+    @JavascriptInterface
+    public void requestPairBluetoothDevice(String macAddress) {
+        mActivity.requestPairBluetoothDevice(macAddress);
+    }
+
+    @JavascriptInterface
+    public void sleepFiveSecAndLog() {
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Log.i("JsInterface", "sleepFiveSecAndLog(), Current time: " + System.currentTimeMillis());
+    }
+
+    @JavascriptInterface
+    public void log() {
+        Log.i("JsInterface", "log(), Current time: " + System.currentTimeMillis());
     }
 
 }

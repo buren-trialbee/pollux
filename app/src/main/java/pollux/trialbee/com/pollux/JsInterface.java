@@ -88,12 +88,11 @@ public class JsInterface implements WebAppInterface {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        Log.i("JsInterface", "sleepFiveSecAndLog(), Current time: " + System.currentTimeMillis());
+//        Log.i("JsInterface", "sleepFiveSecAndLog(), Current time: " + System.currentTimeMillis());
     }
 
     @JavascriptInterface
     public void log() {
         Log.i("JsInterface", "log(), Current time: " + System.currentTimeMillis());
     }
-
 }

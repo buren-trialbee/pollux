@@ -21,9 +21,9 @@ public class WebViewDataSender {
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
 
-        // Initialize webView with a zoomed out view (to get room for image)
-        webSettings.setLoadWithOverviewMode(true);
-        webSettings.setUseWideViewPort(true);
+//        // Initialize webView with a zoomed out view (to get room for image)
+//        webSettings.setLoadWithOverviewMode(true);
+//        webSettings.setUseWideViewPort(true);
 
         // Add javascript interface
         webView.addJavascriptInterface(new JsInterface(context), "Android");

@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Pollux.iml" filepath="$PROJECT_DIR$/Pollux.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/pollux.iml" filepath="$PROJECT_DIR$/pollux.iml" />
     </modules>
   </component>
 </project>

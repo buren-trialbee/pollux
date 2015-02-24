@@ -166,7 +166,6 @@ public class MainActivity extends ActionBarActivity {
             }
         }
         webViewDataSender.sendData("showPairedBluetoothDevices", pairedBluetoothDevice.toString());
-        //delete this comment
     }
 
     public void discoverBluetoothDevices() {

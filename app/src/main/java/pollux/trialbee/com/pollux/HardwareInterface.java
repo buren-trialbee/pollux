@@ -31,4 +31,6 @@ public interface HardwareInterface {
     public void requestStartBluetooth(int requestEnableBt);
 
     public HashMap<String, String> getPairedBluetoothDevices();
+
+    public void requestPairBluetoothDevice(String macAddress);
 }

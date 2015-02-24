@@ -59,6 +59,9 @@ public class MainActivity extends ActionBarActivity {
                 }
 //                Log.i(TAG, device.getName() + " " + device.getAddress());
             }
+//            if (BluetoothDevice.ACTION_BOND_STATE_CHANGED.equals(action) && action) {
+//
+//            }
         }
     };
 
@@ -71,7 +74,9 @@ public class MainActivity extends ActionBarActivity {
         hw = new AndroidHardware(this);
 
         IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
+        IntentFilter bondStateFilter = new IntentFilter(BluetoothDevice.ACTION_BOND_STATE_CHANGED);
         registerReceiver(mReceiver, filter); // Don't forget to unregister during onDestroy
+        registerReceiver(mReceiver, bondStateFilter); // Don't forget to unregister during onDestroy
     }
 
     @Override
@@ -171,5 +176,10 @@ public class MainActivity extends ActionBarActivity {
             hw.discoverBluetoothDevices();
         }
     }
-    
+
+    public void requestPairBluetoothDevice(String macAddress) {
+        hw.requestPairBluetoothDevice(macAddress);
+    }
+
+
 }

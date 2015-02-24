@@ -126,4 +126,9 @@ public class AndroidHardware implements HardwareInterface {
     public void discoverBluetoothDevices() {
         mBluetoothAdapter.startDiscovery();
     }
+
+    public void requestPairBluetoothDevice(String macAddress) {
+        BluetoothDevice device = mBluetoothAdapter.getRemoteDevice(macAddress);
+        device.createBond();
+    }
 }

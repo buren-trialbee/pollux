@@ -39,4 +39,13 @@ public interface WebAppInterface {
 
     @JavascriptInterface
     public void getPairedBluetoothDevices();
+
+    @JavascriptInterface
+    public void requestPairBluetoothDevice(String macAddress);
+
+    @JavascriptInterface
+    public void sleepFiveSecAndLog();
+
+    @JavascriptInterface
+    public void log();
 }

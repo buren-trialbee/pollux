@@ -2,6 +2,7 @@ package pollux.trialbee.com.pollux;
 
 import android.app.Activity;
 import android.content.Context;
+import android.os.Build;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -20,6 +21,12 @@ public class WebViewDataSender {
         // Enable javascript
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
+
+        // Enable remote debugging if OS version is high enough
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            WebView.setWebContentsDebuggingEnabled(true);
+        }
+
 
 //        // Initialize webView with a zoomed out view (to get room for image)
 //        webSettings.setLoadWithOverviewMode(true);

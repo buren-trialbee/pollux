@@ -27,7 +27,11 @@ public class WebViewDataSender {
 
         // Add javascript interface
         webView.addJavascriptInterface(new JsInterface(context), "Android");
-
+        try {
+            Thread.sleep(200);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         // Load pollux server page on "http://pollux-server.heroku.com"
         webView.post(new Runnable() {
             @Override

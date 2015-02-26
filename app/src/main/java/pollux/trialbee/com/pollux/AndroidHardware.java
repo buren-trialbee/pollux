@@ -38,44 +38,22 @@ public class AndroidHardware implements HardwareInterface {
         this.context = context;
         // Initialize member variable for default bluetooth adapter
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-
     }
 
-    public void requestImage(int requestCode) {
-        // Create the intent for capturing an image
-        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
-        // Ensure that there's a camera activity to handle the intent
-        if (takePictureIntent.resolveActivity(context.getPackageManager()) != null) {
-            // Create the File where the photo should go
-            String fileName = "tempPhoto";
-            File storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
-            try {
-                photoFile = File.createTempFile(fileName, ".jpg", storageDir);
-//                Toast.makeText(mContext, photoFile.toString(), Toast.LENGTH_SHORT).show();
-                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT,
-                        Uri.fromFile(photoFile));
-
-                // Start camera activity and store resulting image in external storage
-                ((Activity) context).startActivityForResult(takePictureIntent, requestCode);
-            } catch (IOException exc) {
-                exc.printStackTrace();
-            }
+    @Override
+    public static File requestImageFile() {
+        String fileName = "tempPhoto";
+        File storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+        try {
+            photoFile = File.createTempFile(fileName, ".jpg", storageDir);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+        return photoFile;
     }
 
-    public String getImageBase64() {
-        // Get photo file as bitMap
-        Bitmap bm = BitmapFactory.decodeFile(photoFile.getAbsolutePath());
-
-        // Convert bitmap to byte array
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bm.compress(Bitmap.CompressFormat.JPEG, 100, baos); //bm is the bitmap object
-        byte[] b = baos.toByteArray();
-        return Base64.encodeToString(b, Base64.DEFAULT);
-    }
-
-    public Boolean hasSystemFeature(String feature) {
+    public static Boolean hasSystemFeature(String feature) {
         switch (feature) {
             case "camera":
                 return context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA);
@@ -128,7 +106,8 @@ public class AndroidHardware implements HardwareInterface {
     }
 
     public void requestPairBluetoothDevice(String macAddress) {
-        BluetoothDevice device = mBluetoothAdapter.getRemoteDevice(macAddress);
-        device.createBond();
+//        BluetoothDevice device = mBluetoothAdapter.getRemoteDevice(macAddress);
+//        device.createBond();
     }
+
 }

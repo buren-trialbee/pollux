@@ -17,13 +17,13 @@ import android.webkit.WebViewClient;
  */
 public class WebViewDataSender {
     private WebView webView;
+    private final Context context;
 
-    public WebViewDataSender(Context context) {
-        webView = (WebView) ((Activity) context).findViewById(R.id.webView);
+    public WebViewDataSender(Context c) {
+        webView = (WebView) ((Activity) c).findViewById(R.id.webView);
+        this.context = c;
 
-//        webView.setWebChromeClient(new WebChromeClient());
         webView.setWebViewClient(new WebViewClient());
-
 
         // Enable javascript
         WebSettings webSettings = webView.getSettings();
@@ -34,28 +34,45 @@ public class WebViewDataSender {
             WebView.setWebContentsDebuggingEnabled(true);
         }
 
-
-//        // Initialize webView with a zoomed out view (to get room for image)
-//        webSettings.setLoadWithOverviewMode(true);
-//        webSettings.setUseWideViewPort(true);
-
         // Add javascript interface
         webView.addJavascriptInterface(new JsInterface(context), "Android");
+
         // Load pollux server page on "http://pollux-server.heroku.com"
         webView.post(new Runnable() {
             @Override
             public void run() {
-                webView.loadUrl("http://pollux-server.heroku.com");
+                webView.loadUrl(context.getString(R.string.webpage_url));
             }
         });
     }
 
-    public synchronized void sendData(final String javascriptFunction, final String arg) {
+    public void sendData(final String javascriptFunction, final String arg) {
         webView.post(new Runnable() {
             @Override
             public void run() {
                 webView.loadUrl("javascript:" + javascriptFunction + "('" + arg + "')");
             }
         });
+    }
+
+    public void addImageBase64(String base64) {
+        sendData("addImgBase64", base64);
+    }
+
+    public void overload() {
+        webView.post(new Runnable() {
+            @Override
+            public void run() {
+
+            }
+        });
+    }
+
+    public void sendPairedBluetoothDevices(String pairedBluetoothDevices) {
+        sendData("showPairedBluetoothDevices", pairedBluetoothDevices);
+    }
+
+    public void sendFoundBluetoothDevices(String foundDevice) {
+        sendData("foundBluetoothDevices", foundDevice);
     }
 }

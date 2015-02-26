@@ -16,7 +16,7 @@ public interface WebAppInterface {
     public void requestImage();
 
     // Asks android system for hardware functionality.
-    // Feature string maps to android feature as defined in class implementing hardware interface
+    // Feature string maps to android feature as defined in class implementing HardwareInterface
     @JavascriptInterface
     public String hasSystemFeature(String feature);
 

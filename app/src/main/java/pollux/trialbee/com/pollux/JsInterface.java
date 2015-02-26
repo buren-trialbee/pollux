@@ -19,15 +19,15 @@ import java.io.IOException;
 /**
  * Created by dauvid on 2015-02-03.
  */
-public class JsInterface implements WebAppInterface {
+public class JsInterface {
     //    MainActivity mActivity;
-    private MainActivity mActivity;
+    private Bridge bridge;
 
     /**
      * Instantiate the interface and set the context
      */
-    JsInterface(Context context) {
-        mActivity = (MainActivity) context;
+    JsInterface(Bridge bridge) {
+       this.bridge = bridge;
     }
 
     /**
@@ -35,7 +35,8 @@ public class JsInterface implements WebAppInterface {
      */
     @JavascriptInterface
     public void showToast(String toast) {
-        Toast.makeText(mActivity, toast, Toast.LENGTH_SHORT).show();
+        bridge.showToast(toast);
+
     }
 
     /**
@@ -43,7 +44,7 @@ public class JsInterface implements WebAppInterface {
      */
     @JavascriptInterface
     public void requestImage() {
-        mActivity.requestImage();
+        bridge.requestImage();
     }
 
     @JavascriptInterface

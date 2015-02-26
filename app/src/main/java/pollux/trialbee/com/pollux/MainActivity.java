@@ -21,15 +21,13 @@ import java.util.HashMap;
 
 public class MainActivity extends ActionBarActivity {
     // Request codes
-    public static final int REQUEST_IMAGE_CAPTURE = 1;
-    public static final int REQUEST_ENABLE_BT = 2;
-    private WebViewDataSender webViewDataSender;
+
+    private HashMap<Integer, Callback> callbacks;
 
     // Log tag
     private static final String TAG = "MainActivity";
 
     // Private member fields
-    private HardwareInterface hw;
     private Bridge bridge;
 
     // Create a BroadcastReceiver for ACTION_FOUND
@@ -41,7 +39,6 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
         webViewDataSender = new WebViewDataSender(this);
 
-        hw = new AndroidHardware(this);
         bridge = new Bridge(this);
 
         IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
@@ -58,11 +55,18 @@ public class MainActivity extends ActionBarActivity {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+       Callback cb = callbacks.get(requestCode);
+       cb.finished(requestCode, resultCode, data);
+/*
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) { // If a picture was taken and saved due to a request from webView
             sendImageToWebView();
         } else if (requestCode == REQUEST_ENABLE_BT && resultCode == RESULT_OK) {
             hw.discoverBluetoothDevices();
-        }
+        }*/
+    }
+    public void startIntent (Intent intent,int requestCode, Callback callback){
+        callbacks.put(requestCode, callback);
+        startActivityForResult(intent, requestCode);
     }
 
     /**

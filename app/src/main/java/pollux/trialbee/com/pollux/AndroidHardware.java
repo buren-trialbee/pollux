@@ -29,16 +29,11 @@ import java.util.Set;
 /**
  * Created by dauvid on 2015-02-17.
  */
-public class AndroidHardware implements HardwareInterface {
+public class AndroidHardware {
     public File photoFile;
     private Context context;
     private BluetoothAdapter mBluetoothAdapter;
 
-    public AndroidHardware(Context context) {
-        this.context = context;
-        // Initialize member variable for default bluetooth adapter
-        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-    }
 
 
     @Override
@@ -51,7 +46,12 @@ public class AndroidHardware implements HardwareInterface {
             e.printStackTrace();
         }
         return photoFile;
+    }    public AndroidHardware(Context context) {
+        this.context = context;
+        // Initialize member variable for default bluetooth adapter
+        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
     }
+
 
     public static Boolean hasSystemFeature(String feature) {
         switch (feature) {

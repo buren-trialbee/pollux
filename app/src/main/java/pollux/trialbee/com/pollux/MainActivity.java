@@ -59,7 +59,7 @@ public class MainActivity extends ActionBarActivity {
                 }
 //                Log.i(TAG, device.getName() + " " + device.getAddress());
             }
-//            if (BluetoothDevice.ACTION_BOND_STATE_CHANGED.equals(action) && action) {
+//              if (BluetoothDevice.ACTION_BOND_STATE_CHANGED.equals(action) && action) {
 //
 //            }
         }
@@ -83,7 +83,6 @@ public class MainActivity extends ActionBarActivity {
     protected void onDestroy() {
         super.onDestroy();
         unregisterReceiver(mReceiver);
-
     }
 
     @Override

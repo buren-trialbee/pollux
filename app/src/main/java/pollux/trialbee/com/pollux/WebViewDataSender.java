@@ -1,8 +1,13 @@
 package pollux.trialbee.com.pollux;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.os.Build;
+import android.content.DialogInterface;
+import android.util.Log;
+import android.webkit.ConsoleMessage;
+import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -15,8 +20,10 @@ public class WebViewDataSender {
 
     public WebViewDataSender(Context context) {
         webView = (WebView) ((Activity) context).findViewById(R.id.webView);
+
 //        webView.setWebChromeClient(new WebChromeClient());
         webView.setWebViewClient(new WebViewClient());
+
 
         // Enable javascript
         WebSettings webSettings = webView.getSettings();
@@ -34,11 +41,6 @@ public class WebViewDataSender {
 
         // Add javascript interface
         webView.addJavascriptInterface(new JsInterface(context), "Android");
-        try {
-            Thread.sleep(200);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         // Load pollux server page on "http://pollux-server.heroku.com"
         webView.post(new Runnable() {
             @Override

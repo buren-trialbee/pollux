@@ -1,6 +1,8 @@
 package pollux.trialbee.com.pollux;
 
+import android.app.Activity;
 import android.content.Context;
+import android.webkit.WebView;
 import android.widget.Toast;
 
 import java.io.File;
@@ -16,7 +18,7 @@ public class Bridge {
     public Bridge(Context context) {
         this.context = context;
         mActivity = (MainActivity) context;
-        webViewDataSender = new WebViewDataSender(context);
+        webViewDataSender = new WebViewDataSender(this, (WebView) mActivity.findViewById(R.id.webView));
     }
 
     public void requestImage() {

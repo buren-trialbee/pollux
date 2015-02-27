@@ -21,7 +21,7 @@ public class MainActivity extends ActionBarActivity {
     // Request codes
 
     private HashMap<Integer, Callback> callbacks;
-
+    private UniqueInteger uniqueInteger;
     // Log tag
     private static final String TAG = "MainActivity";
 
@@ -38,7 +38,7 @@ public class MainActivity extends ActionBarActivity {
 //        webViewDataSender = new WebViewDataSender(this);
 
         bridge = new Bridge(this);
-
+        uniqueInteger = new UniqueInteger();
         IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
         IntentFilter bondStateFilter = new IntentFilter(BluetoothDevice.ACTION_BOND_STATE_CHANGED);
 //        registerReceiver(mReceiver, filter); // Don't forget to unregister during onDestroy
@@ -63,7 +63,7 @@ public class MainActivity extends ActionBarActivity {
         }*/
     }
     public void processIntent(Intent intent, Callback callback){
-        int requestCode =  1;
+        int requestCode =  uniqueInteger.getUniqueInteger();
         callbacks.put(requestCode, callback);
         startActivityForResult(intent, requestCode);
     }

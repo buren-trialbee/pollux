@@ -21,7 +21,7 @@ public class ImageCallback implements Callback {
     }
 
     @Override
-    public void finished(int requestCode, int resultCode, Intent data) {
+    public void done(int requestCode, int resultCode, Intent data) {
         Bundle extras = data.getExtras();
         Uri photoFileUri = (Uri) extras.get(MediaStore.EXTRA_OUTPUT);
         bridge.sendImageBase64(getImageBase64(photoFileUri));

@@ -1,6 +1,5 @@
 package pollux.trialbee.com.pollux;
 
-import android.app.ActivityManager;
 import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -10,7 +9,6 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -56,7 +54,7 @@ public class MainActivity extends ActionBarActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
        Callback cb = callbacks.get(requestCode);
-       cb.finished(requestCode, resultCode, data);
+       cb.done(requestCode, resultCode, data);
 /*
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) { // If a picture was taken and saved due to a request from webView
             sendImageToWebView();
@@ -64,7 +62,7 @@ public class MainActivity extends ActionBarActivity {
             hw.discoverBluetoothDevices();
         }*/
     }
-    public void startIntent (Intent intent,int requestCode, Callback callback){
+    public void processIntent(Intent intent, int requestCode, Callback callback){
         callbacks.put(requestCode, callback);
         startActivityForResult(intent, requestCode);
     }

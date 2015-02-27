@@ -1,19 +1,9 @@
 package pollux.trialbee.com.pollux;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
-import android.os.Environment;
-import android.provider.MediaStore;
-import android.util.Base64;
 import android.widget.Toast;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.IOException;
 
 /**
  * Created by dauvid on 2015-02-26.
@@ -33,7 +23,7 @@ public class Bridge {
     }
 
     public void requestImage() {
-        mActivity.startIntent(IntentFactory.createImageIntent(context), REQUEST_IMAGE_CAPTURE, new ImageCallback(this));
+        mActivity.processIntent(IntentFactory.createImageIntent(context), REQUEST_IMAGE_CAPTURE, new ImageCallback(this));
         // Create the intent for capturing an image
        /* Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 

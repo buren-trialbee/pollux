@@ -6,5 +6,5 @@ import android.content.Intent;
  * Created by dauvid on 2015-02-26.
  */
 public interface Callback {
-    public void finished(int requestCode, int resultCode, Intent data);
+    public void done(int requestCode, int resultCode, Intent data);
 }

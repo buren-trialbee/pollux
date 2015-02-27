@@ -29,22 +29,15 @@ import java.util.Set;
 /**
  * Created by dauvid on 2015-02-17.
  */
-public class AndroidHardware implements HardwareInterface {
+public class AndroidHardware {
     public File photoFile;
     private Context context;
     private BluetoothAdapter mBluetoothAdapter;
 
-    public AndroidHardware(Context context) {
-        this.context = context;
-        // Initialize member variable for default bluetooth adapter
-        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-    }
-
-
-    @Override
     public static File requestImageFile() {
         String fileName = "tempPhoto";
         File storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+        File photoFile = null;
         try {
             photoFile = File.createTempFile(fileName, ".jpg", storageDir);
         } catch (IOException e) {
@@ -53,18 +46,25 @@ public class AndroidHardware implements HardwareInterface {
         return photoFile;
     }
 
-    public static Boolean hasSystemFeature(String feature) {
-        switch (feature) {
-            case "camera":
-                return context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA);
-            case "accelerometer":
-                return context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_SENSOR_ACCELEROMETER);
-            case "bluetooth":
-                return context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH);
-            default:
-                return null;
-        }
+    public AndroidHardware(Context context) {
+        this.context = context;
+        // Initialize member variable for default bluetooth adapter
+        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
     }
+
+//
+//    public static Boolean hasSystemFeature(String feature) {
+//        switch (feature) {
+//            case "camera":
+//                return context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA);
+//            case "accelerometer":
+//                return context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_SENSOR_ACCELEROMETER);
+//            case "bluetooth":
+//                return context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH);
+//            default:
+//                return null;
+//        }
+//    }
 
     public String getAPIVersion() {
         return String.valueOf(Build.VERSION.SDK_INT);
@@ -87,7 +87,6 @@ public class AndroidHardware implements HardwareInterface {
         ((Activity) context).startActivityForResult(enableBtIntent, requestCode);
     }
 
-    @Override
     public HashMap<String, String> getPairedBluetoothDevices() {
         Set<BluetoothDevice> pairedDevices = mBluetoothAdapter.getBondedDevices();
         HashMap<String, String> pairedDevicesMap = new HashMap<String, String>();

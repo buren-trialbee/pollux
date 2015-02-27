@@ -19,15 +19,15 @@ import java.io.IOException;
 /**
  * Created by dauvid on 2015-02-03.
  */
-public class JsInterface implements WebAppInterface {
+public class JsInterface {
     //    MainActivity mActivity;
-    private MainActivity mActivity;
+    private Bridge bridge;
 
     /**
      * Instantiate the interface and set the context
      */
-    JsInterface(Context context) {
-        mActivity = (MainActivity) context;
+    JsInterface(Bridge bridge) {
+       this.bridge = bridge;
     }
 
     /**
@@ -35,7 +35,8 @@ public class JsInterface implements WebAppInterface {
      */
     @JavascriptInterface
     public void showToast(String toast) {
-        Toast.makeText(mActivity, toast, Toast.LENGTH_SHORT).show();
+        bridge.showToast(toast);
+
     }
 
     /**
@@ -43,55 +44,55 @@ public class JsInterface implements WebAppInterface {
      */
     @JavascriptInterface
     public void requestImage() {
-        mActivity.requestImage();
+        bridge.requestImage();
     }
 
-    @JavascriptInterface
-    public String hasSystemFeature(String feature) {
-        return mActivity.hasSystemFeature(feature);
-    }
-
-    @JavascriptInterface
-    public String getApplicationVersion() {
-        return mActivity.getAPIVersion();
-    }
-
-    @JavascriptInterface
-    public String getAPIVersion() {
-        return mActivity.getAPIVersion();
-    }
-
-    @JavascriptInterface
-    public void discoverBluetoothDevices() {
-        mActivity.discoverBluetoothDevices();
-    }
-
-    @JavascriptInterface
-    public String getDeviceInfo() {
-        return mActivity.getDeviceInfo();
-    }
-
-    @JavascriptInterface
-    public void getPairedBluetoothDevices() {
-        mActivity.getPairedBluetoothDevices();
-    }
-
-    @JavascriptInterface
-    public void requestPairBluetoothDevice(String macAddress) {
-        mActivity.requestPairBluetoothDevice(macAddress);
-    }
-
-    @JavascriptInterface
-    public void sleepFiveSecAndLog() {
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @JavascriptInterface
-    public void log() {
-        Log.i("JsInterface", "log(), Current time: " + System.currentTimeMillis());
-    }
+//    @JavascriptInterface
+//    public String hasSystemFeature(String feature) {
+//        return mActivity.hasSystemFeature(feature);
+//    }
+//
+//    @JavascriptInterface
+//    public String getApplicationVersion() {
+//        return mActivity.getAPIVersion();
+//    }
+//
+//    @JavascriptInterface
+//    public String getAPIVersion() {
+//        return mActivity.getAPIVersion();
+//    }
+//
+//    @JavascriptInterface
+//    public void discoverBluetoothDevices() {
+//        mActivity.discoverBluetoothDevices();
+//    }
+//
+//    @JavascriptInterface
+//    public String getDeviceInfo() {
+//        return mActivity.getDeviceInfo();
+//    }
+//
+//    @JavascriptInterface
+//    public void getPairedBluetoothDevices() {
+//        mActivity.getPairedBluetoothDevices();
+//    }
+//
+//    @JavascriptInterface
+//    public void requestPairBluetoothDevice(String macAddress) {
+//        mActivity.requestPairBluetoothDevice(macAddress);
+//    }
+//
+//    @JavascriptInterface
+//    public void sleepFiveSecAndLog() {
+//        try {
+//            Thread.sleep(5000);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+//    }
+//
+//    @JavascriptInterface
+//    public void log() {
+//        Log.i("JsInterface", "log(), Current time: " + System.currentTimeMillis());
+//    }
 }

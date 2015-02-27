@@ -17,12 +17,10 @@ import android.webkit.WebViewClient;
  */
 public class WebViewDataSender {
     private WebView webView;
-    private final Context context;
-
-    public WebViewDataSender(Context c) {
-        webView = (WebView) ((Activity) c).findViewById(R.id.webView);
-        this.context = c;
-
+    private Bridge bridge;
+    public WebViewDataSender(Bridge b, WebView wV) {
+        this.bridge = b;
+        webView = wV;
         webView.setWebViewClient(new WebViewClient());
 
         // Enable javascript
@@ -35,13 +33,13 @@ public class WebViewDataSender {
         }
 
         // Add javascript interface
-        webView.addJavascriptInterface(new JsInterface(context), "Android");
+        webView.addJavascriptInterface(new JsInterface(bridge), "Android");
 
         // Load pollux server page on "http://pollux-server.heroku.com"
         webView.post(new Runnable() {
             @Override
             public void run() {
-                webView.loadUrl(context.getString(R.string.webpage_url));
+                webView.loadUrl("http://pollux-server.heroku.com");
             }
         });
     }

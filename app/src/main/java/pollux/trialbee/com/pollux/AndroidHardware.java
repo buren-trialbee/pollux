@@ -34,37 +34,37 @@ public class AndroidHardware {
     private Context context;
     private BluetoothAdapter mBluetoothAdapter;
 
-
-
-    @Override
     public static File requestImageFile() {
         String fileName = "tempPhoto";
         File storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+        File photoFile = null;
         try {
             photoFile = File.createTempFile(fileName, ".jpg", storageDir);
         } catch (IOException e) {
             e.printStackTrace();
         }
         return photoFile;
-    }    public AndroidHardware(Context context) {
+    }
+
+    public AndroidHardware(Context context) {
         this.context = context;
         // Initialize member variable for default bluetooth adapter
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
     }
 
-
-    public static Boolean hasSystemFeature(String feature) {
-        switch (feature) {
-            case "camera":
-                return context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA);
-            case "accelerometer":
-                return context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_SENSOR_ACCELEROMETER);
-            case "bluetooth":
-                return context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH);
-            default:
-                return null;
-        }
-    }
+//
+//    public static Boolean hasSystemFeature(String feature) {
+//        switch (feature) {
+//            case "camera":
+//                return context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA);
+//            case "accelerometer":
+//                return context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_SENSOR_ACCELEROMETER);
+//            case "bluetooth":
+//                return context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH);
+//            default:
+//                return null;
+//        }
+//    }
 
     public String getAPIVersion() {
         return String.valueOf(Build.VERSION.SDK_INT);
@@ -87,7 +87,6 @@ public class AndroidHardware {
         ((Activity) context).startActivityForResult(enableBtIntent, requestCode);
     }
 
-    @Override
     public HashMap<String, String> getPairedBluetoothDevices() {
         Set<BluetoothDevice> pairedDevices = mBluetoothAdapter.getBondedDevices();
         HashMap<String, String> pairedDevicesMap = new HashMap<String, String>();

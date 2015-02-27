@@ -47,52 +47,52 @@ public class JsInterface {
         bridge.requestImage();
     }
 
-    @JavascriptInterface
-    public String hasSystemFeature(String feature) {
-        return mActivity.hasSystemFeature(feature);
-    }
-
-    @JavascriptInterface
-    public String getApplicationVersion() {
-        return mActivity.getAPIVersion();
-    }
-
-    @JavascriptInterface
-    public String getAPIVersion() {
-        return mActivity.getAPIVersion();
-    }
-
-    @JavascriptInterface
-    public void discoverBluetoothDevices() {
-        mActivity.discoverBluetoothDevices();
-    }
-
-    @JavascriptInterface
-    public String getDeviceInfo() {
-        return mActivity.getDeviceInfo();
-    }
-
-    @JavascriptInterface
-    public void getPairedBluetoothDevices() {
-        mActivity.getPairedBluetoothDevices();
-    }
-
-    @JavascriptInterface
-    public void requestPairBluetoothDevice(String macAddress) {
-        mActivity.requestPairBluetoothDevice(macAddress);
-    }
-
-    @JavascriptInterface
-    public void sleepFiveSecAndLog() {
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @JavascriptInterface
-    public void log() {
-        Log.i("JsInterface", "log(), Current time: " + System.currentTimeMillis());
-    }
+//    @JavascriptInterface
+//    public String hasSystemFeature(String feature) {
+//        return mActivity.hasSystemFeature(feature);
+//    }
+//
+//    @JavascriptInterface
+//    public String getApplicationVersion() {
+//        return mActivity.getAPIVersion();
+//    }
+//
+//    @JavascriptInterface
+//    public String getAPIVersion() {
+//        return mActivity.getAPIVersion();
+//    }
+//
+//    @JavascriptInterface
+//    public void discoverBluetoothDevices() {
+//        mActivity.discoverBluetoothDevices();
+//    }
+//
+//    @JavascriptInterface
+//    public String getDeviceInfo() {
+//        return mActivity.getDeviceInfo();
+//    }
+//
+//    @JavascriptInterface
+//    public void getPairedBluetoothDevices() {
+//        mActivity.getPairedBluetoothDevices();
+//    }
+//
+//    @JavascriptInterface
+//    public void requestPairBluetoothDevice(String macAddress) {
+//        mActivity.requestPairBluetoothDevice(macAddress);
+//    }
+//
+//    @JavascriptInterface
+//    public void sleepFiveSecAndLog() {
+//        try {
+//            Thread.sleep(5000);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+//    }
+//
+//    @JavascriptInterface
+//    public void log() {
+//        Log.i("JsInterface", "log(), Current time: " + System.currentTimeMillis());
+//    }
 }

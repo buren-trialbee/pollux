@@ -9,27 +9,30 @@ import android.provider.MediaStore;
 import android.util.Base64;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 
 /**
  * Created by philip on 2015-02-26.
  */
 public class ImageCallback implements Callback {
+    private Uri photoFileUri;
     private Bridge bridge;
 
-    public ImageCallback(Bridge bridge){
+    public ImageCallback(Bridge bridge, Uri photoFileUri){
         this.bridge = bridge;
+        this.photoFileUri = photoFileUri;
     }
 
     @Override
     public void done(int requestCode, int resultCode, Intent data) {
-        Bundle extras = data.getExtras();
-        Uri photoFileUri = (Uri) extras.get(MediaStore.EXTRA_OUTPUT);
         bridge.sendImageBase64(getImageBase64(photoFileUri));
     }
 
     private String getImageBase64(Uri uri) {
         // Get photo file as bitMap
-        Bitmap bm = BitmapFactory.decodeFile(String.valueOf(uri));
+        File photoFile = new File(uri.toString());
+        String filePath = photoFile.getAbsolutePath();
+        Bitmap bm = BitmapFactory.decodeFile(filePath);
 
         // Convert bitmap to byte array
         ByteArrayOutputStream baos = new ByteArrayOutputStream();

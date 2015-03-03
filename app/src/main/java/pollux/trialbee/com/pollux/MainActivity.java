@@ -39,6 +39,7 @@ public class MainActivity extends ActionBarActivity {
 
         bridge = new Bridge(this);
         uniqueInteger = new UniqueInteger();
+        callbacks = new HashMap<>();
         IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
         IntentFilter bondStateFilter = new IntentFilter(BluetoothDevice.ACTION_BOND_STATE_CHANGED);
 //        registerReceiver(mReceiver, filter); // Don't forget to unregister during onDestroy

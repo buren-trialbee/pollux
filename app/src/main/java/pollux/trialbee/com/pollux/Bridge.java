@@ -2,6 +2,9 @@ package pollux.trialbee.com.pollux;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.webkit.WebView;
 import android.widget.Toast;
 
@@ -22,7 +25,10 @@ public class Bridge {
     }
 
     public void requestImage() {
-        mActivity.processIntent(IntentFactory.createImageIntent(context), new ImageCallback(this));
+        Intent imageIntent = IntentFactory.createImageIntent(context);
+        Uri photoFileUri = (Uri) imageIntent.getExtras().get(MediaStore.EXTRA_OUTPUT);
+        ImageCallback imageCallback = new ImageCallback(this, photoFileUri);
+        mActivity.processIntent(imageIntent, imageCallback);
     }
 
     public void sendImageBase64(String image){

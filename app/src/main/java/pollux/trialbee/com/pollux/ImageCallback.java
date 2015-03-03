@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Base64;
+import android.util.Log;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -17,6 +18,7 @@ import java.io.File;
 public class ImageCallback implements Callback {
     private Uri photoFileUri;
     private Bridge bridge;
+    private static final String TAG = "ImageCallBack";
 
     public ImageCallback(Bridge bridge, Uri photoFileUri){
         this.bridge = bridge;
@@ -25,13 +27,16 @@ public class ImageCallback implements Callback {
 
     @Override
     public void done(int requestCode, int resultCode, Intent data) {
+        Log.d(TAG, "done");
         bridge.sendImageBase64(getImageBase64(photoFileUri));
     }
 
     private String getImageBase64(Uri uri) {
+        Log.d(TAG, "getImageBase64");
         // Get photo file as bitMap
-        File photoFile = new File(uri.toString());
+        File photoFile = new File(uri.getPath());
         String filePath = photoFile.getAbsolutePath();
+        Log.d(TAG, "filePath to image is: " + filePath);
         Bitmap bm = BitmapFactory.decodeFile(filePath);
 
         // Convert bitmap to byte array

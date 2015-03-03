@@ -1,5 +1,6 @@
 package pollux.trialbee.com.pollux;
 
+import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -25,5 +26,8 @@ public class IntentFactory {
                     Uri.fromFile(photoFile));
         }
         return takePictureIntent;
+    }
+    public static Intent createStartBluetoothIntent() {
+        return new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
     }
 }

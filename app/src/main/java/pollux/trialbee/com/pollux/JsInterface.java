@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.nfc.Tag;
 import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -22,12 +23,13 @@ import java.io.IOException;
 public class JsInterface {
     //    MainActivity mActivity;
     private Bridge bridge;
+    private static final String TAG = "JsInterface";
 
     /**
      * Instantiate the interface and set the context
      */
     JsInterface(Bridge bridge) {
-       this.bridge = bridge;
+        this.bridge = bridge;
     }
 
     /**
@@ -44,7 +46,13 @@ public class JsInterface {
      */
     @JavascriptInterface
     public void requestImage() {
+        Log.d(TAG, "requestImage");
         bridge.requestImage();
+    }
+
+    @JavascriptInterface
+    public String getDeviceInfo() {
+        return bridge.getDeviceInfo();
     }
 
 //    @JavascriptInterface
@@ -62,15 +70,12 @@ public class JsInterface {
 //        return mActivity.getAPIVersion();
 //    }
 //
-//    @JavascriptInterface
-//    public void discoverBluetoothDevices() {
-//        mActivity.discoverBluetoothDevices();
-//    }
-//
-//    @JavascriptInterface
-//    public String getDeviceInfo() {
-//        return mActivity.getDeviceInfo();
-//    }
+    @JavascriptInterface
+    public void discoverBluetoothDevices() {
+        bridge.discoverBluetoothDevices();
+    }
+
+
 //
 //    @JavascriptInterface
 //    public void getPairedBluetoothDevices() {

@@ -30,9 +30,7 @@ import java.util.Set;
  * Created by dauvid on 2015-02-17.
  */
 public class AndroidHardware {
-    public File photoFile;
-    private Context context;
-    private BluetoothAdapter mBluetoothAdapter;
+    private static final String TAG="AndroidHardware";
 
     public static File requestImageFile() {
         String fileName = "tempPhoto";
@@ -46,11 +44,11 @@ public class AndroidHardware {
         return photoFile;
     }
 
-    public AndroidHardware(Context context) {
-        this.context = context;
-        // Initialize member variable for default bluetooth adapter
-        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-    }
+//    public AndroidHardware(Context context) {
+//        this.context = context;
+//        // Initialize member variable for default bluetooth adapter
+//        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+//    }
 
 //
 //    public static Boolean hasSystemFeature(String feature) {
@@ -66,47 +64,47 @@ public class AndroidHardware {
 //        }
 //    }
 
-    public String getAPIVersion() {
-        return String.valueOf(Build.VERSION.SDK_INT);
-    }
+//    public String getAPIVersion() {
+//        return String.valueOf(Build.VERSION.SDK_INT);
+//    }
 
-    public String getDeviceInfo() throws JSONException {
+    public static String getDeviceInfo(Context context) throws JSONException {
+        Log.d(TAG, "getDeviceInfo");
+
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("camera", context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_ANY));
-        jsonObject.put("bluetooth", context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH));
-        jsonObject.put("accelerometer", context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_SENSOR_ACCELEROMETER));
+        PackageManager packageManager = context.getPackageManager();
+        jsonObject.put("camera", packageManager.hasSystemFeature(PackageManager.FEATURE_CAMERA_ANY));
+        jsonObject.put("bluetooth", packageManager.hasSystemFeature(PackageManager.FEATURE_BLUETOOTH));
+        jsonObject.put("accelerometer", packageManager.hasSystemFeature(PackageManager.FEATURE_SENSOR_ACCELEROMETER));
         return jsonObject.toString();
     }
 
-    public boolean isBluetoothActivated() {
-        return mBluetoothAdapter.isEnabled();
+    public static boolean isBluetoothActivated() {
+        return BluetoothAdapter.getDefaultAdapter().isEnabled();
     }
+//
 
-    public void requestStartBluetooth(int requestCode) {
-        Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-        ((Activity) context).startActivityForResult(enableBtIntent, requestCode);
+//
+//    public HashMap<String, String> getPairedBluetoothDevices() {
+//        Set<BluetoothDevice> pairedDevices = mBluetoothAdapter.getBondedDevices();
+//        HashMap<String, String> pairedDevicesMap = new HashMap<String, String>();
+//        // If there are paired devices
+//        if (pairedDevices.size() > 0) {
+//            // Loop through paired devices
+//            for (BluetoothDevice device : pairedDevices) {
+//                pairedDevicesMap.put(device.getAddress(), device.getName());
+//            }
+//        }
+//        return pairedDevicesMap;
+//    }
+//
+    public static void discoverBluetoothDevices() {
+        BluetoothAdapter.getDefaultAdapter().startDiscovery();
     }
-
-    public HashMap<String, String> getPairedBluetoothDevices() {
-        Set<BluetoothDevice> pairedDevices = mBluetoothAdapter.getBondedDevices();
-        HashMap<String, String> pairedDevicesMap = new HashMap<String, String>();
-        // If there are paired devices
-        if (pairedDevices.size() > 0) {
-            // Loop through paired devices
-            for (BluetoothDevice device : pairedDevices) {
-                pairedDevicesMap.put(device.getAddress(), device.getName());
-            }
-        }
-        return pairedDevicesMap;
-    }
-
-    public void discoverBluetoothDevices() {
-        mBluetoothAdapter.startDiscovery();
-    }
-
-    public void requestPairBluetoothDevice(String macAddress) {
-//        BluetoothDevice device = mBluetoothAdapter.getRemoteDevice(macAddress);
-//        device.createBond();
-    }
+//
+//    public void requestPairBluetoothDevice(String macAddress) {
+////        BluetoothDevice device = mBluetoothAdapter.getRemoteDevice(macAddress);
+////        device.createBond();
+//    }
 
 }

@@ -56,20 +56,14 @@ public class WebViewDataSender {
         });
     }
 
+
+
+
+    // Deprecated functions
     public void addImageBase64(String base64) {
         Log.d(TAG, "addImageBase64");
         sendData("addImgBase64", base64);
     }
-
-//    public void overload() {
-//        webView.post(new Runnable() {
-//            @Override
-//            public void run() {
-//
-//            }
-//        });
-//    }
-
     public void sendPairedBluetoothDevices(String pairedBluetoothDevices) {
         sendData("showPairedBluetoothDevices", pairedBluetoothDevices);
     }

@@ -18,17 +18,20 @@ import java.io.File;
 public class ImageCallback implements Callback {
     private Uri photoFileUri;
     private Bridge bridge;
-    private static final String TAG = "ImageCallBack";
+    private static final String TAG = "ImageCallback";
+    private String callbackName;
 
-    public ImageCallback(Bridge bridge, Uri photoFileUri){
+    public ImageCallback(Bridge bridge, Uri photoFileUri, String callbackName){
         this.bridge = bridge;
         this.photoFileUri = photoFileUri;
+        this.callbackName = callbackName;
     }
 
     @Override
     public void done(int requestCode, int resultCode, Intent data) {
         Log.d(TAG, "done");
-        bridge.sendImageBase64(getImageBase64(photoFileUri));
+        /*/bridge.sendImageBase64(getImageBase64(photoFileUri));*/
+        bridge.processCallback(callbackName, getImageBase64(photoFileUri));
     }
 
     private String getImageBase64(Uri uri) {

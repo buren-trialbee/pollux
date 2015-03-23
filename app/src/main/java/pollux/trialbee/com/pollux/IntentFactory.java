@@ -12,9 +12,7 @@ import java.io.File;
  * Created by philip on 2015-02-26.
  */
 public class IntentFactory {
-
-
-    public static Intent createImageIntent(Context context) {
+    public static Intent createCameraIntent(Context context) {
         // Create the intent for capturing an image
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
@@ -27,6 +25,20 @@ public class IntentFactory {
         }
         return takePictureIntent;
     }
+    public static Intent createImageIntent(Context context) {
+        // Create the intent for capturing an image
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+        // Ensure that there's a camera activity to handle the intent
+        if (takePictureIntent.resolveActivity(context.getPackageManager()) != null) {
+            // Create the File where the photo should go        // Create callback method
+            File photoFile = AndroidHardware.requestImageFile();
+            takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT,
+                    Uri.fromFile(photoFile));
+        }
+        return takePictureIntent;
+    }
+
     public static Intent createStartBluetoothIntent() {
         return new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
     }

@@ -41,13 +41,19 @@ public class JsInterface {
 
     }
 
+    @JavascriptInterface
+    public void requestCamera(String callback) {
+        Log.d(TAG, "requestImage");
+        bridge.requestCamera(callback);
+    }
+
     /**
      * Request an image from the device
      */
     @JavascriptInterface
-    public void requestImage() {
+    public void requestImage(String callback) {
         Log.d(TAG, "requestImage");
-        bridge.requestImage();
+        bridge.requestImage(callback);
     }
 
     @JavascriptInterface
@@ -55,6 +61,11 @@ public class JsInterface {
         return bridge.getDeviceInfo();
     }
 
+
+    @JavascriptInterface
+    public void getGeoLocation(String callback) {
+
+    }
 //    @JavascriptInterface
 //    public String hasSystemFeature(String feature) {
 //        return mActivity.hasSystemFeature(feature);

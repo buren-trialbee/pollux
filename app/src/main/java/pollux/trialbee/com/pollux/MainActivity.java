@@ -60,6 +60,9 @@ public class MainActivity extends ActionBarActivity {
         registerReceiver(broadcastReceiver, intentFilter);
         this.broadcastReceiver = broadcastReceiver;
     }
+
+    public void addBroadcastReciver(DiscoveredBluetoothDevice discoveredBluetoothDevice, IntentFilter intentFilter) {
+    }
 //    public String getAPIVersion() {
 //        return hw.getAPIVersion();
 //    }

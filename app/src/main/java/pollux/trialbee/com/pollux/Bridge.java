@@ -25,17 +25,51 @@ public class Bridge {
         webViewDataSender = new WebViewDataSender(this, (WebView) mActivity.findViewById(R.id.webView));
     }
 
-    public void requestImage() {
-        Log.d(TAG, "requestImage");
-        Intent imageIntent = IntentFactory.createImageIntent(context);
+    public void requestCamera(String callback) {
+        Log.d(TAG, "requestCamera");
+
+        // Create a new intent
+        Intent imageIntent = IntentFactory.createCameraIntent(context);
+
+        // Retrieve filepath to photo being captured
         Uri photoFileUri = (Uri) imageIntent.getExtras().get(MediaStore.EXTRA_OUTPUT);
-        ImageCallback imageCallback = new ImageCallback(this, photoFileUri);
+
+        // Create callback method
+        ImageCallback imageCallback = new ImageCallback(this, photoFileUri, callback);
+
+        // Send intent to mainActivity for processing
+        mActivity.processIntent(imageIntent, imageCallback);
+    }
+
+    public void requestImage(String callback) {
+        Log.d(TAG, "requestImage");
+
+        // Create a new intent
+        Intent imageIntent = IntentFactory.createImageIntent(context);
+
+        Uri photoFileUri = (Uri) imageIntent.getExtras().get(MediaStore.EXTRA_OUTPUT);
+        ImageCallback imageCallback = new ImageCallback(this, photoFileUri, callback);
         mActivity.processIntent(imageIntent, imageCallback);
     }
 
     public void sendImageBase64(String image) {
         webViewDataSender.addImageBase64(image);
     }
+
+    public void processCallback(String callback, String argument) {
+        webViewDataSender.sendData(callback, argument);
+    }
+
+
+
+
+
+
+
+
+
+
+
 
     public void showToast(String toast) {
         Toast.makeText(mActivity, toast, Toast.LENGTH_SHORT).show();

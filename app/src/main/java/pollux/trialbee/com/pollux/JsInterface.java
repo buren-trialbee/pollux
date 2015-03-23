@@ -45,7 +45,8 @@ public class JsInterface {
 
     // Request the devices gps-location
     @JavascriptInterface
-    public void getGeoLocation(String callback) {
-
+    public void getGeolocation(String callback) {
+        Log.d(TAG, "getGeoLocation");
+        bridge.getGeolocation(callback);
     }
 }

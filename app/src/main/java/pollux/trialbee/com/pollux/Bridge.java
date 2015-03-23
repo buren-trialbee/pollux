@@ -2,6 +2,8 @@ package pollux.trialbee.com.pollux;
 
 import android.content.Context;
 import android.content.Intent;
+import android.location.Location;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -9,6 +11,7 @@ import android.webkit.WebView;
 import android.widget.Toast;
 
 import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * Created by dauvid on 2015-02-26.
@@ -55,10 +58,27 @@ public class Bridge {
     }
 
     public void getGeolocation(String callback) {
+        LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+        String locationProvider = LocationManager.NETWORK_PROVIDER;
+        Location lastKnownLocation = locationManager.getLastKnownLocation(locationProvider);
 
+        // Create JSONObject containing longitude and latitude
+        JSONObject locationJSON = new JSONObject();
+        try {
+            locationJSON.put("longitude", Double.toString(lastKnownLocation.getLongitude()));
+            locationJSON.put("latitude", Double.toString(lastKnownLocation.getLatitude()));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        processCallback(callback, locationJSON.toString());
     }
 
     public void processCallback(String callback, String argument) {
         webViewDataSender.sendData(callback, argument);
     }
+
+
 }
+
+
+

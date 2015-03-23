@@ -1,45 +1,48 @@
 package pollux.trialbee.com.pollux;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.os.Bundle;
-import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 
 /**
- * Created by philip on 2015-02-26.
+ * Created by dauvid on 2015-03-23.
  */
-public class ImageCallback implements Callback {
-    private Uri photoFileUri;
+public class ImagePickCallback implements Callback {
     private Bridge bridge;
-    private static final String TAG = "ImageCallback";
+    private static final String TAG = "ImagePickCallback";
     private String callbackName;
-
-    public ImageCallback(Bridge bridge, Uri photoFileUri, String callbackName){
+    private Context context;
+    public ImagePickCallback(Bridge bridge,Context context, String callbackName){
         this.bridge = bridge;
-        this.photoFileUri = photoFileUri;
         this.callbackName = callbackName;
+        this.context = context;
     }
 
     @Override
     public void done(int requestCode, int resultCode, Intent data) {
-        Log.d(TAG, "done");
-        bridge.processCallback(callbackName, getImageBase64(photoFileUri));
+        Log.d(TAG, "hej");
+        bridge.processCallback(callbackName, getImageBase64(data.getData()));
     }
 
     private String getImageBase64(Uri uri) {
         Log.d(TAG, "getImageBase64");
         // Get photo file as bitMap
-        File photoFile = new File(uri.getPath());
-        String filePath = photoFile.getAbsolutePath();
-        Log.d(TAG, "filePath to image is: " + filePath);
-        Bitmap bm = BitmapFactory.decodeFile(filePath);
+        InputStream imageStream = null;
+        try {
+            imageStream = context.getContentResolver().openInputStream(uri);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        Bitmap bm = BitmapFactory.decodeStream(imageStream);
 
         // Convert bitmap to byte array
         ByteArrayOutputStream baos = new ByteArrayOutputStream();

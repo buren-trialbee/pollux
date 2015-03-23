@@ -26,20 +26,16 @@ public class IntentFactory {
         return takePictureIntent;
     }
     public static Intent createImageIntent(Context context) {
-        // Create the intent for capturing an image
-        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-
+        // Create the intent for picking an image
+        Intent getImageIntent = new Intent(Intent.ACTION_PICK);
+        getImageIntent.setType("image/*");
         // Ensure that there's a camera activity to handle the intent
-        if (takePictureIntent.resolveActivity(context.getPackageManager()) != null) {
-            // Create the File where the photo should go        // Create callback method
-            File photoFile = AndroidHardware.requestImageFile();
-            takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT,
-                    Uri.fromFile(photoFile));
-        }
-        return takePictureIntent;
+
+        return getImageIntent;
     }
 
-    public static Intent createStartBluetoothIntent() {
-        return new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+    public static Intent createGeolocationIntent (Context context) {
+        // Not implemented yet
+        return null;
     }
 }

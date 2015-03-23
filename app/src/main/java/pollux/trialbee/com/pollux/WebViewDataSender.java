@@ -1,13 +1,7 @@
 package pollux.trialbee.com.pollux;
 
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.Context;
 import android.os.Build;
-import android.content.DialogInterface;
 import android.util.Log;
-import android.webkit.ConsoleMessage;
-import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -54,21 +48,5 @@ public class WebViewDataSender {
                 webView.loadUrl("javascript:" + javascriptFunction + "('" + arg + "')");
             }
         });
-    }
-
-
-
-
-    // Deprecated functions
-    public void addImageBase64(String base64) {
-        Log.d(TAG, "addImageBase64");
-        sendData("addImgBase64", base64);
-    }
-    public void sendPairedBluetoothDevices(String pairedBluetoothDevices) {
-        sendData("showPairedBluetoothDevices", pairedBluetoothDevices);
-    }
-
-    public void sendFoundBluetoothDevices(String foundDevice) {
-        sendData("foundBluetoothDevices", foundDevice);
     }
 }

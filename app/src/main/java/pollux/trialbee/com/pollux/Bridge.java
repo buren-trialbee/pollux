@@ -47,55 +47,18 @@ public class Bridge {
         // Create a new intent
         Intent imageIntent = IntentFactory.createImageIntent(context);
 
-        Uri photoFileUri = (Uri) imageIntent.getExtras().get(MediaStore.EXTRA_OUTPUT);
-        ImageCallback imageCallback = new ImageCallback(this, photoFileUri, callback);
-        mActivity.processIntent(imageIntent, imageCallback);
+        // Create callback for the intent
+        ImagePickCallback imagePickCallback = new ImagePickCallback(this, context, callback);
+
+        // Send intent to mainActivity for processing
+        mActivity.processIntent(imageIntent, imagePickCallback);
     }
 
-    public void sendImageBase64(String image) {
-        webViewDataSender.addImageBase64(image);
+    public void getGeolocation(String callback) {
+
     }
 
     public void processCallback(String callback, String argument) {
         webViewDataSender.sendData(callback, argument);
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-    public void showToast(String toast) {
-        Toast.makeText(mActivity, toast, Toast.LENGTH_SHORT).show();
-    }
-
-    public String getDeviceInfo() {
-        try {
-            return AndroidHardware.getDeviceInfo(context);
-        } catch (JSONException exc) {
-            Log.e(TAG, exc.getMessage());
-            return null;
-        }
-    }
-
-    public void discoverBluetoothDevices() {
-        if (!AndroidHardware.isBluetoothActivated()) {
-            mActivity.processIntent(IntentFactory.createStartBluetoothIntent(), new StartBluetoothCallback(this));
-        } else {
-            DiscoveredBluetoothDevice discoveredBluetoothDevice = new DiscoveredBluetoothDevice(this, context);
-            mActivity.addBroadcastReciver(discoveredBluetoothDevice, discoveredBluetoothDevice.getIntentFilter());
-
-            AndroidHardware.discoverBluetoothDevices();
-        }
-    }
-
-    public void foundBluetoothDevice(String bluetoothDevice) {
-        webViewDataSender.sendFoundBluetoothDevices(bluetoothDevice);
     }
 }

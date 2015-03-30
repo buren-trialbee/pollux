@@ -41,12 +41,13 @@ public class MainActivity extends ActionBarActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         Log.d(TAG, "OnActivityResult");
-        Callback cb = callbacks.get(requestCode);
+        Callback cb = callbacks.remove(requestCode);
         cb.done(requestCode, resultCode, data);
     }
 
     public void processIntent(Intent intent, Callback callback) {
         Log.d(TAG, "processIntent");
+        //use an unique intiteger when putting the callback in the hashmap
         int requestCode = uniqueInteger.getUniqueInteger();
         callbacks.put(requestCode, callback);
         startActivityForResult(intent, requestCode);
